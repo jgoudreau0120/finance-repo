@@ -6,10 +6,6 @@ function Navbar(){
 
   const [pageTitle, setPageTitle] = useState('Page title here');
 
-  function changePageTitle(pageName){
-    setPageTitle(pageName);
-  }
-
   return (
     <nav className='nav'>
       <span id='myPageTitle' className='page-title'>{pageTitle}</span>
