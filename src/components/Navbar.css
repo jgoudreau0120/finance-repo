@@ -1,5 +1,27 @@
+
 .nav {
   display: flex;
+  /* Puts even space around elements */
   justify-content: space-around;
-  
+  background-color: rgb(16, 112, 214);
+  /* Top/bottom = 0, left/right = 1rem */
+  padding: 0 1rem;
+  /* Stretches items to fill entire parent vertically */
+  align-items: stretch;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: space-around;
+  /* Removes bullet points */
+  list-style: none;
+  /* Space between list items */
+  gap: 1rem;
+  margin: 0;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
 }
