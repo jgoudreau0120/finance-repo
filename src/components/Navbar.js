@@ -1,10 +1,19 @@
-import react from 'react';
+import react, { useState } from 'react';
 import './Navbar.css'
 
+
+
 function Navbar(){
+
+  const [pageTitle, setPageTitle] = useState('Page title here');
+
+  function changePageTitle(pageName){
+    setPageTitle(pageName);
+  }
+
   return (
-    <nav className="nav">
-      <span className="page-title">Page title here</span>
+    <nav className='nav'>
+      <span id='myPageTitle' className='page-title'>{pageTitle}</span>
       <ul>
         <li>
           <a href='./myAccount'>My Account</a>
