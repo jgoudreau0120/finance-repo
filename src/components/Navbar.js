@@ -1,7 +1,6 @@
 import react, { useState } from 'react';
 import './Navbar.css'
-
-
+import { BrowserRouter, Route, Routes } from "react-router";
 
 function Navbar(){
 
