@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
 
     let documentTitle = '';
-    
+
     switch(location.pathname) {
 
       case '/home':
