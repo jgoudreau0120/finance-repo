@@ -1,4 +1,5 @@
 import React from "react";
+import './AccountManagement.css';
 
 const AccountManagement = () => {
   return (
