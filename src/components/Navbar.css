@@ -6,7 +6,7 @@
 .nav {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(23, 16, 214);
+  background-color: rgb(67, 62, 193);
   align-items: stretch;
   padding: 0 1rem;
   color: white;
@@ -37,6 +37,6 @@
 }
 
 .nav a:hover {
-  background-color: rgb(43, 226, 70);
+  background-color: rgb(13, 33, 167);
 }
 

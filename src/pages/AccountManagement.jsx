@@ -1,6 +1,6 @@
 import React from "react";
 
-function AccountManagement () {
+const AccountManagement = () => {
   return (
     <div>This is your account</div>
   )

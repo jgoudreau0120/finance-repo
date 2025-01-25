@@ -9,15 +9,17 @@ import Settings from './pages/Settings';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Login/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route path='/myAccount' element={<Account/>}></Route>
-        <Route path='/settings' element={<Settings/>}></Route>
-      </Routes>
-    </Router>
+    <div>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Login/>}></Route>
+          <Route path='/home' element={<Home/>}></Route>
+          <Route path='/myAccount' element={<Account/>}></Route>
+          <Route path='/settings' element={<Settings/>}></Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

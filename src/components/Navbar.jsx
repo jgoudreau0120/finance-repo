@@ -4,34 +4,39 @@ import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-do
 
 const Navbar = () => {
 
-  const [pageTitle, setPageTitle] = useState('');
+  const [pageTitle, setPageHeader] = useState('');
 
   //Grab the url to determine how to set the title of the page
   const location = useLocation();
 
   useEffect(() => {
+
+    let documentTitle = '';
+    
     switch(location.pathname) {
 
       case '/home':
-        setPageTitle('Home');
-        document.title = 'Home';
+        setPageHeader('Home');
+        documentTitle = 'Home';
         break;
 
       case '/myAccount':
-        setPageTitle('My Account');
-        document.title = 'Your Account';
+        setPageHeader('My Account');
+        documentTitle = 'Your Account';
         break;
 
       case '/settings':
-        setPageTitle('Settings');
-        document.title = 'Settings';
+        setPageHeader('Settings');
+        documentTitle = 'Settings';
         break;
 
       default:
-        setPageTitle('Login');
-        document.title = 'Login';
+        setPageHeader('Login');
+        documentTitle = 'Login';
         break;        
     }
+
+    document.title = `My App | ${documentTitle}`;
     //Listens for changes in url to re render
   }, [location.pathname]
   );
