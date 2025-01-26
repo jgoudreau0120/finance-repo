@@ -40,3 +40,6 @@
   background-color: rgb(13, 33, 167);
 }
 
+.hidden {
+  display: none;
+}
