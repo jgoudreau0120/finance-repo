@@ -1,0 +1,90 @@
+body, html {
+  height: 100%;
+}
+
+
+h1 {
+  font-size: 2vw;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 20%;
+}
+
+.left {
+  justify-content: left;
+}
+
+.row.center {
+  justify-content: center
+  ;
+}
+
+input, label, button {
+  font-size: 1.75vw;
+  margin: 10px;
+  border-radius: 10px;
+  width: 20%;
+  border: none;
+}
+
+button {
+  transition: all 0.1s ease;
+  font-weight: bold;
+  color: white;
+}
+
+button.help {
+  background-color: rgba(112, 130, 100);
+  font-size: 1vw;
+  width: 40%;
+}
+
+button.help:hover {
+  background-color: rgb(5, 115, 148);
+}
+
+button.submit {
+  background-color: #089705;
+}
+
+button.submit:hover {
+  background-color: #066904;
+}
+
+button.new {
+  background-color: rgb(45, 45, 251);
+  font-size: 1vw;
+  width: 75%;
+}
+
+button.new:hover{
+  background-color: rgb(2, 2, 171);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none;
+}
+
+.wide {
+  width: 100%;
+}

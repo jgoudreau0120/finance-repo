@@ -6,10 +6,11 @@ import Home from './pages/Home';
 import Account from './pages/AccountManagement';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
+import Tile from './components/Tile';
 
 function App() {
   return (
-    <div>
+    <div className='inherit'>
       <Router>
         <Navbar />
         <Routes>

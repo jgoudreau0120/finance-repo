@@ -1,5 +1,6 @@
 import react, { useEffect, useState } from 'react';
 import './Navbar.css';
+import '../App.css';
 import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -36,14 +37,14 @@ const Navbar = () => {
         break;        
     }
 
-    document.title = `My App | ${documentTitle}`;
+    document.title = `FYW | ${documentTitle}`;
     //Listens for changes in url to re render
   }, [location.pathname]
   );
   
 
   return (
-    <nav className='nav'>
+    <nav className='nav hidden'>
       <span id='myPageTitle' className='page-title'>{pageTitle}</span>
       <ul>
         <li>

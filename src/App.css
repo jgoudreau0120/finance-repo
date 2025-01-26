@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.inherit {
+  height: inherit;
+  width: inherit;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,4 +1,5 @@
 import './Home.css';
+import Tile from '../components/Tile';
 
 const Home = () => {
   return (
