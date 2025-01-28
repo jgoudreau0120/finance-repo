@@ -2,10 +2,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './Login.css';
+import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className='flex center inherit' style={{backgroundColor: 'rgba(112, 130, 100)'}}>
+    <div className='background flex center inherit'>
       <div className='container'>
         <div className='row center'>
           <h1>FYW: Finance, Your Way</h1>
@@ -23,7 +24,8 @@ const Login = () => {
           <button className='btn btn-primary wide'>Sign In</button>
         </div>
         <div className='row center'>
-          <button className='btn btn-success wide'>Create User</button>
+          <Link to='/createUser'><button className='btn btn-success wide'>Create User</button></Link>
+          
         </div>
       </div>
     </div>

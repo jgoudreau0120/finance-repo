@@ -7,6 +7,7 @@ import Account from './pages/AccountManagement';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
 import Tile from './components/Tile';
+import CreateUser from './pages/CreateUser';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/home' element={<Home/>}></Route>
           <Route path='/myAccount' element={<Account/>}></Route>
           <Route path='/settings' element={<Settings/>}></Route>
+          <Route path='/createUser' element={<CreateUser/>}></Route>
         </Routes>
       </Router>
     </div>
