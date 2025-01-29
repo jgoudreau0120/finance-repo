@@ -1,5 +1,4 @@
-import './Home.css';
-import Tile from '../components/Tile';
+import styles from './Home.module.css';
 
 const Home = () => {
   return (

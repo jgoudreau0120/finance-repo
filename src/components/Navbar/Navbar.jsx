@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react';
-import './Navbar.css';
-import '../App.css';
+import styles from './Navbar.module.css';
 import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
+import classNames from 'classnames';
 
 const Navbar = () => {
 
@@ -44,8 +44,8 @@ const Navbar = () => {
   
 
   return (
-    <nav className='nav hidden'>
-      <span id='myPageTitle' className='page-title'>{pageTitle}</span>
+    <nav className={classNames(styles.nav, styles.hidden)}>
+      <span id='myPageTitle' className={styles.pageTitle}>{pageTitle}</span>
       <ul>
         <li>
           <Link to='/home'>Home</Link>

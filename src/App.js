@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from './pages/Home';
-import Account from './pages/AccountManagement';
-import Login from './pages/Login';
-import Settings from './pages/Settings';
-import Tile from './components/Tile';
-import CreateUser from './pages/CreateUser';
+import Home from './pages/Home/Home';
+import Account from './pages/AccountManagement/AccountManagement';
+import Login from './pages/Login/Login';
+import Settings from './pages/Settings/Settings';
+import Tile from './components/Tile/Tile';
+import CreateUser from './pages/CreateUser/CreateUser';
 
 function App() {
   return (

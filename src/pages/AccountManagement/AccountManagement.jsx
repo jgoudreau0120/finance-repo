@@ -1,5 +1,5 @@
 import React from "react";
-import './AccountManagement.css';
+import styles from './AccountManagement.module.css';
 
 const AccountManagement = () => {
   return (

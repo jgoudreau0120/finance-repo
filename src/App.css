@@ -45,3 +45,23 @@
 .hidden {
   display: none;
 }
+
+a {
+  padding: 0 !important;
+  width: 100%;
+}
+
+body, html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+input, button {
+  font-size: 1.5vw;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 10px;
+}
