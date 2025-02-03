@@ -51,6 +51,7 @@ a {
   width: 100%;
 }
 
+
 body, html {
   height: 100%;
   padding: 0;
@@ -66,8 +67,9 @@ input, button, label {
   margin-bottom: 10px;
 }
 
-label {
-  text-align: right;
+label, h1 {
+  text-align: center;
+  color: white;
 }
 
 .row {
