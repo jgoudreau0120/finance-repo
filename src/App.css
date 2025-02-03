@@ -57,11 +57,30 @@ body, html {
   margin: 0;
 }
 
-input, button {
+input, button, label {
   font-size: 1vw;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: none;
   margin-bottom: 10px;
+}
+
+label {
+  text-align: right;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
