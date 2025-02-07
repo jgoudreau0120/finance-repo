@@ -1,40 +1,11 @@
-.header {
-  font-size: 2vw;
-  color: white;
-  text-align: center;
+.loginBackground {
+  background-color: steelblue;
 }
 
 /* Layout Styling */
 
 .container {
   width: 25%;
-}
-
-.background {
-  background-color: rgb(36, 80, 26);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-}
-
-.left {
-  justify-content: left;
-}
-
-.right {
-  justify-content: right;
-}
-
-.hidden {
-  display: none;
 }
 
 /* Form elements */

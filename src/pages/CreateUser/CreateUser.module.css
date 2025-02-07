@@ -1,20 +1,9 @@
-/* Global styles */
-
-
-
-
-
-
 /* Layout styles */
-
-.background {
-  background-color: rgb(36, 80, 26);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
 .container {
   width: 30%;
+}
+
+.createUserBackground {
+  background-color: darkcyan;
 }

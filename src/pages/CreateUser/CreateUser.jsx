@@ -1,5 +1,8 @@
+import '../../App.css';
 import styles from './CreateUser.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
+import classNames from 'classnames';
 
 const CreateUser = () => {
 
@@ -17,7 +20,7 @@ const CreateUser = () => {
   }
 
   return(
-    <div className={styles.background}>
+    <div className={classNames('background', styles.createUserBackground)}>
       <div className={styles.container}>
         <div className='row'>
           <h1>Create a User Profile</h1>
@@ -45,6 +48,11 @@ const CreateUser = () => {
         <div className='row'>
           <div className='col'>
             <button id='submitButton' className='btn btn-success' disabled>Create User</button>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col'>
+            <Link to='/'><button className='btn btn-success'>Back To Login</button></Link>
           </div>
         </div>
       </div>

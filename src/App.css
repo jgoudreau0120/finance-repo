@@ -59,7 +59,7 @@ body, html {
 }
 
 input, button, label {
-  font-size: 1vw;
+  font-size: 1vw !important;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
@@ -78,6 +78,7 @@ label, h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: 0;
 }
 
 .col {
@@ -85,4 +86,26 @@ label, h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.background {
+  background-color: rgb(36, 80, 26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.left {
+  justify-content: left;
+}
+
+.right {
+  justify-content: right;
+}
+
+.header {
+  font-size: 2vw;
+  color: white;
+  text-align: center;
 }
