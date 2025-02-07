@@ -23,7 +23,7 @@ const CreateUser = () => {
     <div className={classNames('background', styles.createUserBackground)}>
       <div className={styles.container}>
         <div className='row'>
-          <h1 className='header'>Create a User Profile</h1>
+          <h1>Create a User Profile</h1>
         </div>
         <div className='row'>
           <div className='col'>
