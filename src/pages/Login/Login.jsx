@@ -10,7 +10,7 @@ const Login = () => {
     <div className={classNames('background', styles.loginBackground)}>
       <div className={styles.container}>
         <div className='row'>
-          <h1 className='header'>FYW: Finance, Your Way</h1>
+          <h1>FYW: Finance, Your Way</h1>
         </div>
         <div className='row'>
           <input id='myUsernameInput' type='text' placeholder='Username'/>
