@@ -1,10 +1,12 @@
 import dbConfig from './dbConfig.js';
-import mssql from 'mssql';
+import mysql from 'mysql2';
+
+
 
 const getEmployees = async() => {
-  try{
+  try {
     let pool = await mssql.connect(dbConfig);
-    let employees = pool.request().query("");
+    let employees = pool.request().query("SELECT * FROM financeyourway.users");
     console.log(employees);
     return employees;
   }
