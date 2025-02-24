@@ -33,7 +33,7 @@ const CreateUser = () => {
       alert(response.data.message)
     }
     catch (e) {
-      alert('Error creating user');
+      alert('Error creating user or username already exists');
     }
   };
 

@@ -1,7 +1,6 @@
 import express from 'express';
 import dbOperation from './dbFiles/dbOperation.js';
 import cors from 'cors';
-import { Employee } from './dbFiles/employee.js';
 import mysql from 'mysql2';
 import dbConfig from './dbFiles/dbConfig.js';
 
@@ -34,21 +33,36 @@ app.post("/create-user", (request, response) => {
     return response.status(201).json({message: "User created successfully"});
   });
 });
-// let Pam = new Employee(1002, 'Pam', 'Beezley', 29, 'Female');
-// //dbOperation.createEmployee(Pam);
 
-// dbOperation.getEmployees().then(response => {
-//   console.log(response.recordset);
-// });
+app.post("/check-login", (request, response) => {
+  const { username, password } = request.body;
 
-// app.get("/1", (request, response) => {
-//   const query = "SELECT * FROM financeyourway.users";
-//   database.query(query, (error, data) => {
-//     if(error) return response.json("Error");
-//     return response.json(data);
-//   })
-// });
+  if (!username || !password) {
+    return response.status(400).json({error: "All fields are required"})
+  }
+  const query = `SELECT * FROM users WHERE Username = '${username}' AND Password = '${password}'`;
 
+  database.query(query, (error, result) => {
+    if (error){
+      console.error(`Error retrieving user: ${error}`);
+      return response.status(500).json({error: "database error"});
+    }
+    
+    const userData = result[0];
+    
+    if(!userData){
+      return response.status(404).json({error: "User not found"});
+    }
+    
+    return response.status(201).json({message: "User retrieved successfully", 
+      user: {
+        id: userData.id,
+        FirstName: userData.FirstName,
+        LastName: userData.LastName,
+        Username: userData.Username
+    }});
+  });
+});
 
 app.listen(serverPort, () => {
   console.log(`Listening on port ${serverPort}`);
