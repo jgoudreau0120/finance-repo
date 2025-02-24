@@ -23,14 +23,14 @@ const Login = () => {
       const user = response.data.user;
 
       if (user) {
-        alert(`Welcome ${user.FirstName}!`);
+        alert(response.data.message);
       }
       else {
         alert("Invalid username or password!");
       }
     }
     catch (e) {
-      alert('Error logging in, user not found');
+      alert(`Could not find account with username: ${username}`);
     }
 
   };

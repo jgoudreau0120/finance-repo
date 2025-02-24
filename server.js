@@ -40,7 +40,7 @@ app.post("/check-login", (request, response) => {
   if (!username || !password) {
     return response.status(400).json({error: "All fields are required"})
   }
-  const query = `SELECT * FROM users WHERE Username = '${username}' AND Password = '${password}'`;
+  const query = `SELECT * FROM users WHERE Username = '${username}'`;
 
   database.query(query, (error, result) => {
     if (error){
@@ -53,8 +53,18 @@ app.post("/check-login", (request, response) => {
     if(!userData){
       return response.status(404).json({error: "User not found"});
     }
+
+    if(userData.Password !== password){
+      return response.status(201).json({message: "Username or password is incorrect", 
+        user: {
+          id: userData.id,
+          FirstName: userData.FirstName,
+          LastName: userData.LastName,
+          Username: userData.Username
+      }});
+    }
     
-    return response.status(201).json({message: "User retrieved successfully", 
+    return response.status(201).json({message: `Welcome ${userData.FirstName}!`, 
       user: {
         id: userData.id,
         FirstName: userData.FirstName,
