@@ -5,8 +5,14 @@ import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-do
 import classNames from 'classnames';
 import { useState } from 'react';
 import axios from 'axios';
+import { useUser } from '../../UserContext';
+import { useFinances } from '../../FinancialContext';
 
 const Login = () => {
+
+  const { setUser } = useUser();
+  const { updateFinances } = useFinances();
+  const { setFinances }= useFinances();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,20 +24,55 @@ const Login = () => {
       return;
     }
 
+    //First pull user data
     try {
       const response = await axios.post(`${apiUrl}/check-login`, {username, password});
       const user = response.data.user;
 
       if (user) {
         alert(response.data.message);
+        setUser(user);
       }
       else {
         alert("Invalid username or password!");
+      }
+      //Then pull financials
+      //Pull income
+      try {
+        const response = await axios.post(`${apiUrl}/pull-income`, {username});
+        const income = response.data.income;
+
+        if (income) {
+          updateFinances('income', income);
+        }
+        else {
+          alert("Couldn't pull income for user")
+        }
+      }
+      catch (e) {
+        alert(`Could not find income with username: ${username}`);
+      }
+      //Pull expenses
+      try {
+        const response = await axios.post(`${apiUrl}/pull-expenses`, {username});
+        const expenses = response.data.expenses;
+
+        if (expenses) {
+          updateFinances('expenses', expenses);
+        }
+        else {
+          alert("Couldn't pull expenses for user")
+        }
+      }
+      catch (e) {
+        alert(`Could not find expenses with username: ${username}`);
       }
     }
     catch (e) {
       alert(`Could not find account with username: ${username}`);
     }
+
+    
 
   };
 

@@ -34,12 +34,13 @@ app.post("/create-user", (request, response) => {
   });
 });
 
-app.post("/check-login", (request, response) => {
+app.get("/check-login", (request, response) => {
   const { username, password } = request.body;
 
   if (!username || !password) {
     return response.status(400).json({error: "All fields are required"})
   }
+
   const query = `SELECT * FROM users WHERE Username = '${username}'`;
 
   database.query(query, (error, result) => {
@@ -55,13 +56,7 @@ app.post("/check-login", (request, response) => {
     }
 
     if(userData.Password !== password){
-      return response.status(201).json({message: "Username or password is incorrect", 
-        user: {
-          id: userData.id,
-          FirstName: userData.FirstName,
-          LastName: userData.LastName,
-          Username: userData.Username
-      }});
+      return response.status(201).json({message: "Username or password is incorrect"});
     }
     
     return response.status(201).json({message: `Welcome ${userData.FirstName}!`, 
@@ -71,6 +66,54 @@ app.post("/check-login", (request, response) => {
         LastName: userData.LastName,
         Username: userData.Username
     }});
+  });
+});
+
+app.get("/pull-income", (request, response) => {
+  const { username } = request.body;
+
+  if (!username) {
+    return response.status(400).json({error: "All fields are required"})
+  }
+
+  const query = `SELECT Income FROM incomeRecords WHERE Username = '${username}'`;
+
+  database.query(query, (error, result) => {
+    if (error){
+      return response.status(500).json({error: "Database error"});
+    }
+    
+    const incomeData = result[0];
+    
+    if(!incomeData){
+      return response.status(404).json({error: "Income not found"});
+    }
+    
+    return response.status(201).json({message: `Income acquired`, income: incomeData.Income});
+  });
+});
+
+app.get("/pull-expenses", (request, response) => {
+  const { username } = request.body;
+
+  if (!username) {
+    return response.status(400).json({error: "All fields are required"})
+  }
+
+  const query = `SELECT * FROM monthlyExpenses WHERE Username = '${username}'`;
+
+  database.query(query, (error, result) => {
+    if (error){
+      return response.status(500).json({error: "Database error"});
+    }
+    
+    const expenseData = result;
+    
+    if(!expenseData){
+      return response.status(404).json({error: "Expenses not found"});
+    }
+    
+    return response.status(201).json({message: `Expenses acquired`, expenses: expenseData});
   });
 });
 
