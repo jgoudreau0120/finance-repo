@@ -67,7 +67,7 @@ input, button, label {
   margin-bottom: 10px;
 }
 
-label, h1 {
+label {
   text-align: center;
   color: white;
 }
@@ -106,4 +106,5 @@ label, h1 {
 
 h1 {
   font-size: 2vw;
+  text-align: center;
 }

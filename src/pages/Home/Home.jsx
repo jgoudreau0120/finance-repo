@@ -1,8 +1,14 @@
+import { useFinances } from '../../FinancialContext';
+import { useUser } from '../../UserContext';
 import styles from './Home.module.css';
 
 const Home = () => {
+  const { user } = useUser();
+  const { finances } = useFinances();
   return (
-    <div>This is home</div>
+    <div>
+      <h1>Welcome {user.FirstName}!</h1>
+    </div>
   )
 }
 

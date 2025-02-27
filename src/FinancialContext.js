@@ -5,8 +5,7 @@ const FinancialContext = createContext();
 export const FinancialProvider = ({ children }) => {
   const [finances, setFinances] = useState({
     expenses: [],
-    income: 0,
-    yearlyBudget: 0
+    income: 0
   });
 
   const updateFinances = (field, value) => {
@@ -14,7 +13,14 @@ export const FinancialProvider = ({ children }) => {
       ...prevFinance,
       [field]: value
     }));
-  }
+  };
+
+  const addExpense = (newExpense) => {
+    setFinances((prevExpenses) => ({
+      ...prevExpenses,
+      expenses: [...prevExpenses.expenses, newExpense]
+    }));
+  };
 
   return(
     <FinancialContext.Provider value={{finances, updateFinances, setFinances}}>
@@ -24,5 +30,5 @@ export const FinancialProvider = ({ children }) => {
 }
 
 export const useFinances = () => {
-  useContext(FinancialContext);
+  return useContext(FinancialContext);
 }

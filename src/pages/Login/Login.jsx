@@ -7,12 +7,14 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
   const { setUser } = useUser();
   const { updateFinances } = useFinances();
   const { setFinances }= useFinances();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -67,6 +69,7 @@ const Login = () => {
       catch (e) {
         alert(`Could not find expenses with username: ${username}`);
       }
+      navigate('/home');
     }
     catch (e) {
       alert(`Could not find account with username: ${username}`);

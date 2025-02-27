@@ -34,7 +34,7 @@ app.post("/create-user", (request, response) => {
   });
 });
 
-app.get("/check-login", (request, response) => {
+app.post("/check-login", (request, response) => {
   const { username, password } = request.body;
 
   if (!username || !password) {
@@ -69,7 +69,7 @@ app.get("/check-login", (request, response) => {
   });
 });
 
-app.get("/pull-income", (request, response) => {
+app.post("/pull-income", (request, response) => {
   const { username } = request.body;
 
   if (!username) {
@@ -93,7 +93,7 @@ app.get("/pull-income", (request, response) => {
   });
 });
 
-app.get("/pull-expenses", (request, response) => {
+app.post("/pull-expenses", (request, response) => {
   const { username } = request.body;
 
   if (!username) {
@@ -119,4 +119,4 @@ app.get("/pull-expenses", (request, response) => {
 
 app.listen(serverPort, () => {
   console.log(`Listening on port ${serverPort}`);
-})
+});
