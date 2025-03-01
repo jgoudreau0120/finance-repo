@@ -1,8 +1,6 @@
 import express from 'express';
-import dbOperation from './dbFiles/dbOperation.js';
 import cors from 'cors';
 import mysql from 'mysql2';
-import dbConfig from './dbFiles/dbConfig.js';
 
 let database = mysql.createConnection({
   host: 'financeyourway.c9qmwk00a1cu.us-east-2.rds.amazonaws.com',

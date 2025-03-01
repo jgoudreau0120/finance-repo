@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const CreateUser = () => {
   
-  const apiUrl = 'financeyourway.netlify.app';
+  const apiUrl = 'http://localhost:8000';
   const [userData, setUserData] = useState({firstName: "", lastName: "", username: "", password: ""});
   const [submitButtonState, setSubmitState] = useState(true);
 

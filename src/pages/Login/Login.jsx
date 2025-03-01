@@ -18,7 +18,7 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const apiUrl = 'financeyourway.netlify.app';
+  const apiUrl = 'http://localhost:8000';
 
   const handleSignIn = async () => {
     if (username === "" || password === ""){
