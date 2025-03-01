@@ -18,7 +18,7 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const apiUrl = 'http://localhost:8000';
+  const apiUrl = 'financeyourway.netlify.app';
 
   const handleSignIn = async () => {
     if (username === "" || password === ""){
@@ -30,7 +30,7 @@ const Login = () => {
     try {
       const response = await axios.post(`${apiUrl}/check-login`, {username, password});
       const user = response.data.user;
-
+      
       if (user) {
         alert(response.data.message);
         setUser(user);
@@ -74,9 +74,6 @@ const Login = () => {
     catch (e) {
       alert(`Could not find account with username: ${username}`);
     }
-
-    
-
   };
 
   return (
