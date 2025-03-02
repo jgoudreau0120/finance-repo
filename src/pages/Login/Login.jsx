@@ -18,7 +18,7 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const apiUrl = 'http://localhost:8000';
+  const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const handleSignIn = async () => {
     if (username === "" || password === ""){

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const CreateUser = () => {
   
-  const apiUrl = 'http://localhost:8000';
+  const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
   const [userData, setUserData] = useState({firstName: "", lastName: "", username: "", password: ""});
   const [submitButtonState, setSubmitState] = useState(true);
 
