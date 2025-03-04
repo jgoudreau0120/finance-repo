@@ -10,12 +10,13 @@ let database = mysql.createConnection({
   port: 3306
 });
 
-let serverPort = 8000;
+let serverPort = 8080;
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 app.post("/create-user", (request, response) => {
+
   const { firstName, lastName, username, password } = request.body;
 
   if (!firstName || !lastName || !username || !password) {
@@ -33,6 +34,7 @@ app.post("/create-user", (request, response) => {
 });
 
 app.post("/check-login", (request, response) => {
+  
   const { username, password } = request.body;
 
   if (!username || !password) {
@@ -67,8 +69,8 @@ app.post("/check-login", (request, response) => {
   });
 });
 
-app.post("/pull-income", (request, response) => {
-  const { username } = request.body;
+app.get("/pull-income/:username", (request, response) => {
+  const { username } = request.params;
 
   if (!username) {
     return response.status(400).json({error: "All fields are required"})
@@ -91,8 +93,47 @@ app.post("/pull-income", (request, response) => {
   });
 });
 
-app.post("/pull-expenses", (request, response) => {
-  const { username } = request.body;
+app.post("/add-income", (request, response) => {
+
+  const { username, income } = request.body;
+
+  if (!username || !income || isNaN(income)) {
+    return response.status(400).json({error: "All fields are required or there are errors in the fields. Ensure income is non-negative"})
+  }
+
+  const query = `INSERT INTO incomeRecords (Username, Income) VALUES ('${username}', ${income})`;
+
+  database.query(query, (error, result) => {
+    if (error){
+      return response.status(500).json({error: "Database error"});
+    }
+    
+    return response.status(201).json({message: `Income successfully added!`});
+  });
+});
+
+app.patch("/change-income", (request, response) => {
+
+  const { username, income } = request.body;
+
+  if (!username || !income || isNaN(income)) {
+    return response.status(400).json({error: "All fields are required or there are errors in the fields. Ensure income is non-negative"})
+  }
+
+  const query = `UPDATE incomeRecords SET Income = ${income} WHERE Username = '${username}'`;
+
+  database.query(query, (error, result) => {
+    if (error){
+      return response.status(500).json({error: "Database error"});
+    }
+    
+    return response.status(201).json({message: `Income successfully changed!`});
+  });
+});
+
+app.get("/pull-expenses/:username", (request, response) => {
+
+  const { username } = request.params;
 
   if (!username) {
     return response.status(400).json({error: "All fields are required"})
@@ -112,6 +153,44 @@ app.post("/pull-expenses", (request, response) => {
     }
     
     return response.status(201).json({message: `Expenses acquired`, expenses: expenseData});
+  });
+});
+
+app.post("/add-expense", (request, response) => {
+
+  const { username, description, cost } = request.body;
+
+  if (!username || !description || !cost || isNaN(cost)) {
+    return response.status(400).json({error: "All fields are required or there are errors in the fields. Ensure cost is non-negative"})
+  }
+
+  const query = `INSERT INTO monthlyExpenses (Username, ExpenseName, Cost) VALUES ('${username}', '${description}', ${cost})`;
+
+  database.query(query, (error, result) => {
+    if (error){
+      return response.status(500).json({error: "Database error"});
+    }
+    
+    return response.status(201).json({message: `${description} successfully added!`});
+  });
+});
+
+app.patch("/change-expense", (request, response) => {
+
+  const { username, expenseName, cost } = request.body;
+
+  if (!username || !income || isNaN(income)) {
+    return response.status(400).json({error: "All fields are required or there are errors in the fields. Ensure income is non-negative"})
+  }
+
+  const query = `UPDATE monthlyExpenses SET Cost = ${cost} WHERE Username = '${username}' AND ExpenseName = '${expenseName}'`;
+
+  database.query(query, (error, result) => {
+    if (error){
+      return response.status(500).json({error: "Database error"});
+    }
+    
+    return response.status(201).json({message: `Expense successfully changed!`});
   });
 });
 

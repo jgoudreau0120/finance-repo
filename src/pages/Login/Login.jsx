@@ -34,6 +34,7 @@ const Login = () => {
       if (user) {
         alert(response.data.message);
         setUser(user);
+        navigate('/home');
       }
       else {
         alert("Invalid username or password!");
@@ -69,7 +70,7 @@ const Login = () => {
       catch (e) {
         alert(`Could not find expenses with username: ${username}`);
       }
-      navigate('/home');
+      
     }
     catch (e) {
       alert(`Could not find account with username: ${username}`);
