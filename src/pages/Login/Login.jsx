@@ -41,7 +41,7 @@ const Login = () => {
       //Then pull financials
       //Pull income
       try {
-        const response = await axios.post(`${apiUrl}/pull-income`, {username});
+        const response = await axios.get(`${apiUrl}/pull-income/${username}`);
         const income = response.data.income;
 
         if (income) {
@@ -56,7 +56,7 @@ const Login = () => {
       }
       //Pull expenses
       try {
-        const response = await axios.post(`${apiUrl}/pull-expenses`, {username});
+        const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
         const expenses = response.data.expenses;
 
         if (expenses) {
