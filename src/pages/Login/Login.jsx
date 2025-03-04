@@ -35,40 +35,41 @@ const Login = () => {
         alert(response.data.message);
         setUser(user);
         navigate('/home');
+        //Pull income
+        try {
+          const response = await axios.get(`${apiUrl}/pull-income/${username}`);
+          const income = response.data.income;
+  
+          if (income) {
+            updateFinances('income', income);
+          }
+          else {
+            alert("Couldn't pull income for user")
+          }
+        }
+        catch (e) {
+          alert(`Could not find income with username: ${username}`);
+        }
+        //Pull expenses
+        try {
+          const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
+          const expenses = response.data.expenses;
+  
+          if (expenses) {
+            updateFinances('expenses', expenses);
+          }
+          else {
+            alert("Couldn't pull expenses for user")
+          }
+        }
+        catch (e) {
+          console.log(e);
+          alert(`Could not find expenses with username: ${username}`);
+        }
+  
       }
       else {
         alert("Invalid username or password!");
-      }
-      //Then pull financials
-      //Pull income
-      try {
-        const response = await axios.get(`${apiUrl}/pull-income/${username}`);
-        const income = response.data.income;
-
-        if (income) {
-          updateFinances('income', income);
-        }
-        else {
-          alert("Couldn't pull income for user")
-        }
-      }
-      catch (e) {
-        alert(`Could not find income with username: ${username}`);
-      }
-      //Pull expenses
-      try {
-        const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
-        const expenses = response.data.expenses;
-
-        if (expenses) {
-          updateFinances('expenses', expenses);
-        }
-        else {
-          alert("Couldn't pull expenses for user")
-        }
-      }
-      catch (e) {
-        alert(`Could not find expenses with username: ${username}`);
       }
       
     }
