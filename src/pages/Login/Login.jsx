@@ -63,10 +63,8 @@ const Login = () => {
           }
         }
         catch (e) {
-          console.log(e);
           alert(`Could not find expenses with username: ${username}`);
         }
-  
       }
       else {
         alert("Invalid username or password!");
