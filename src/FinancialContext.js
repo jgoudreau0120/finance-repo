@@ -4,7 +4,7 @@ const FinancialContext = createContext();
 
 export const FinancialProvider = ({ children }) => {
   const [finances, setFinances] = useState({
-    expenses: [],
+    expenses: null,
     income: 0
   });
 
