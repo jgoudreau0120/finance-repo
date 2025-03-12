@@ -9,21 +9,34 @@ export const FinancialProvider = ({ children }) => {
   });
 
   const updateFinances = (field, value) => {
-    setFinances(prevFinance => ({
-      ...prevFinance,
-      [field]: value
-    }));
+    setFinances(prevFinance => {
+      return {
+        ...prevFinance,
+        [field]: value
+      };
+    });
   };
 
   const addExpense = (newExpense) => {
-    setFinances((prevExpenses) => ({
-      ...prevExpenses,
-      expenses: [...prevExpenses.expenses, newExpense]
-    }));
+    setFinances((prevFinances) => {
+      return {
+      ...prevFinances,
+      expenses: [...prevFinances.expenses, newExpense]
+      };
+    });
+  };
+
+  const removeExpense = (expenseToRemove) => {
+    setFinances((prevFinances) => {
+      return {
+        ...prevFinances,
+        expenses: prevFinances.expenses.filter((expense) => expense.ExpenseName !== expenseToRemove)
+      }
+    })
   };
 
   return(
-    <FinancialContext.Provider value={{finances, updateFinances, setFinances}}>
+    <FinancialContext.Provider value={{finances, updateFinances, setFinances, addExpense, removeExpense}}>
       {children}
     </FinancialContext.Provider>
   );
