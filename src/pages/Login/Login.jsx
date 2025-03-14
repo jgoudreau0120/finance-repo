@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import { useNavigate } from "react-router-dom";
+import Tile from '../../components/Tile/Tile';
 
 const Login = () => {
 
@@ -78,7 +79,7 @@ const Login = () => {
 
   return (
     <div className={classNames('background', styles.loginBackground)}>
-      <div className={styles.container}>
+      {/* <div className={styles.container}>
         <div className='row'>
           <h1>FYW: Finance, Your Way</h1>
         </div>
@@ -97,7 +98,8 @@ const Login = () => {
         <div className='row'>
           <Link to='/createUser'><button className='btn btn-success'>Create User</button></Link>
         </div>
-      </div>
+      </div> */}
+      <Tile title='Budgeting'></Tile>
     </div>
   )
 }

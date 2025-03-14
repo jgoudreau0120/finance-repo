@@ -1,8 +1,36 @@
 
 .tile {
   display: flex;
-  border-radius: 2px;
+  border-radius: 10px;
   border: 3px solid black;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  /*justify controls main axis, align controls cross axis*/
+  align-items: center;
+  justify-content: center;
+  /*horizontal offset, vertical offset, blur radius, color (rgb opacity)*/
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  background-color: cadetblue;
+  color:white;
+  width: 20%;
+  transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
+}
+
+.tile:hover {
+  transform: scale(1.05);
+  color:darkblue;
+}
+
+.header {
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 5px;
+  /*left right*/
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
