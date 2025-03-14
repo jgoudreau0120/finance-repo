@@ -11,9 +11,9 @@
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   background-color: cadetblue;
   color:white;
-  width: 20%;
+  width: 30%;
   transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
-  margin: 10px;
+  height: 30%;
 }
 
 .tile:hover {
@@ -34,4 +34,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.center {
+ text-align: center;
 }
