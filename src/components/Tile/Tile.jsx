@@ -2,7 +2,7 @@ import styles from './Tile.module.css';
 import { useFinances } from '../../FinancialContext';
 import { useUser } from '../../UserContext';
 import classNames from 'classnames';
-const Tile = ({ title }) => {
+const Tile = ({ title, children }) => {
 
   const { finances } = useFinances();
   
@@ -12,7 +12,7 @@ const Tile = ({ title }) => {
         <h3>{title}</h3>
       </div>
       <div className={styles.content}>
-
+        {children}
       </div>
     </div>
   )
