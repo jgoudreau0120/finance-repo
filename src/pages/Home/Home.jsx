@@ -8,6 +8,19 @@ import '../../App.css';
 const Home = () => {
   const { user } = useUser();
   const { finances } = useFinances();
+  let expenseTotal = 0;
+  let expenseEntries = [];
+  //Make calculations with expenses
+  if (finances.expenses.length > 0){
+    const expenses = finances.expenses;
+
+    for(let i = 0; i < expenses.length; i++){
+      expenseTotal += (parseFloat(expenses[i].Cost));
+      expenseEntries.push(expenses[i]);
+    }
+    
+  }
+  
 
   return (
     <div className={styles.home}>
@@ -17,14 +30,19 @@ const Home = () => {
         </Tile>
 
         <Tile title='Income'>
-          <div className='row'>
+          <div>
             Your Yearly Income: ${finances.income}
           </div>
           
         </Tile>
 
         <Tile title='Expenses'>
-
+          <h4>${expenseTotal}</h4>
+          <ol>
+            {expenseEntries.map((entry) => (
+              <li>{entry.ExpenseName}: ${entry.Cost}/mo</li>
+            ))}
+          </ol>
         </Tile>
 
         
