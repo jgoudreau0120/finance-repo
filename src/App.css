@@ -51,7 +51,6 @@ a {
   width: 100%;
 }
 
-
 body, html {
   height: 100%;
   padding: 0;
@@ -59,12 +58,14 @@ body, html {
 }
 
 input, button, label {
-  font-size: 1vw !important;
-  width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: none;
   margin-bottom: 10px !important;
+}
+
+a button {
+  width: 100%;
 }
 
 label {

@@ -78,28 +78,17 @@ const Login = () => {
   };
 
   return (
-    <div className={classNames('background', styles.loginBackground)}>
-      <div className={styles.container}>
-        <div className='row'>
-          <h1>FYW: Finance, Your Way</h1>
-        </div>
-        <div className='row'>
-          <input id='myUsernameInput' type='text' placeholder='Username' onChange={(e) => {setUsername(e.target.value)}}/>
-        </div>
-        <div className='row'>
-          <input id='myPasswordInput' type='password' placeholder='Password' onChange={(e) => {setPassword(e.target.value)}}/>
-        </div>
-        <div className='row left'>
-          <button className={classNames('btn', 'btn-info', styles.helpButton)}>Can't log in?</button>
-        </div>
-        <div className='row'>
-          <button className='btn btn-primary' onClick={handleSignIn}>Sign In</button>
-        </div>
-        <div className='row'>
-          <Link to='/createUser'><button className='btn btn-success'>Create User</button></Link>
-        </div>
+    <div className={classNames('background', styles.login)}>
+      <div className={styles.titleContainer}>
+        <h1>FYW: Finance, Your Way</h1>
       </div>
-
+      <div className={styles.container}>
+        <input id='myUsernameInput' type='text' placeholder='Username' onChange={(e) => {setUsername(e.target.value)}}/>
+        <input id='myPasswordInput' type='password' placeholder='Password' onChange={(e) => {setPassword(e.target.value)}}/>
+        <button className={classNames('btn', 'btn-info', styles.helpButton)}>Can't log in?</button>
+        <button className='btn btn-primary' onClick={handleSignIn}>Sign In</button>
+        <Link to='/createUser'><button className='btn btn-success'>Create User</button></Link>
+      </div>
     </div>
   )
 }

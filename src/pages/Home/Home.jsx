@@ -26,8 +26,10 @@ const Home = () => {
         <Tile title='Expenses'>
 
         </Tile>
+
+        
       </div>
-      <div className={styles.tileRow}>
+      {/* <div className={styles.tileRow}>
         <Tile title='Tile 1'>
 
         </Tile>
@@ -39,7 +41,7 @@ const Home = () => {
         <Tile title='Tile 3'>
 
         </Tile>
-      </div>
+      </div> */}
 
     </div>
   )

@@ -11,9 +11,12 @@
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   background-color: cadetblue;
   color:white;
-  width: 30%;
   transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
-  height: 30%;
+  flex: 1;
+  min-width: 250px;
+  max-width: 30%;
+  height: 200px;
+  margin: 10px;
 }
 
 .tile:hover {
