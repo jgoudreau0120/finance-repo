@@ -19,14 +19,9 @@ const Home = () => {
       expenseTotal += (parseFloat(expenses[i].Cost));
       expenseEntries.push(expenses[i]);
     }
-  }
 
-  //Sort expenses
-  let tmp = 0;
-  for(let i = 0; i < expenseEntries.length; i++){
-
+    expenseTotal = parseFloat(expenseTotal.toFixed(2));
   }
-  
 
   return (
     <div className={styles.home}>

@@ -23,6 +23,9 @@
 
 .tile:hover {
   transform: scale(1.05);
+}
+
+.tile:hover h3 {
   color:darkblue;
 }
 
