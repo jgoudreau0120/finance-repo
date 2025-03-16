@@ -1,6 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFinances } from '../../FinancialContext';
 import { useUser } from '../../UserContext';
-
 import styles from './Home.module.css';
 import Tile from '../../components/Tile/Tile';
 import '../../App.css';
@@ -10,6 +10,7 @@ const Home = () => {
   const { finances } = useFinances();
   let expenseTotal = 0;
   let expenseEntries = [];
+
   //Make calculations with expenses
   if (finances.expenses.length > 0){
     const expenses = finances.expenses;
@@ -18,7 +19,12 @@ const Home = () => {
       expenseTotal += (parseFloat(expenses[i].Cost));
       expenseEntries.push(expenses[i]);
     }
-    
+  }
+
+  //Sort expenses
+  let tmp = 0;
+  for(let i = 0; i < expenseEntries.length; i++){
+
   }
   
 
