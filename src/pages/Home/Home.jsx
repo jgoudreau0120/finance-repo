@@ -60,19 +60,6 @@ const Home = () => {
 
         
       </div>
-      {/* <div className={styles.tileRow}>
-        <Tile title='Tile 1'>
-
-        </Tile>
-
-        <Tile title='Tile 2'>
-
-        </Tile>
-
-        <Tile title='Tile 3'>
-
-        </Tile>
-      </div> */}
 
     </div>
   )

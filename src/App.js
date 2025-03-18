@@ -19,16 +19,18 @@ function App() {
         <FinancialProvider>
           <Router>
             <Navbar />
-            <Routes>
-              <Route path='/' element={<Login/>}></Route>
-              <Route path='/home' element={<Home/>}></Route>
-              <Route path='/myAccount' element={<Account/>}></Route>
-              <Route path='/settings' element={<Settings/>}></Route>
-              <Route path='/createUser' element={<CreateUser/>}></Route>
-              <Route path='/budgeting' element={<Budgeting/>}></Route>
-              <Route path='/income' element={<IncomeTracking/>}></Route>
-              <Route path='/expenses' element={<Expenses/>}></Route>
-            </Routes>
+            <div className='main'>
+              <Routes>
+                <Route path='/' element={<Login/>}></Route>
+                <Route path='/home' element={<Home/>}></Route>
+                <Route path='/myAccount' element={<Account/>}></Route>
+                <Route path='/settings' element={<Settings/>}></Route>
+                <Route path='/createUser' element={<CreateUser/>}></Route>
+                <Route path='/budgeting' element={<Budgeting/>}></Route>
+                <Route path='/income' element={<IncomeTracking/>}></Route>
+                <Route path='/expenses' element={<Expenses/>}></Route>
+              </Routes>
+            </div>
           </Router>
         </FinancialProvider>
       </UserProvider>

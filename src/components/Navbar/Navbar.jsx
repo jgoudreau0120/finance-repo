@@ -31,6 +31,12 @@ const Navbar = () => {
         documentTitle = 'Settings';
         break;
 
+      case '/expenses':
+        setPageHeader('Expenses');
+        documentTitle = 'Expenses';
+        break;
+
+      
       default:
         setPageHeader('Login');
         documentTitle = 'Login';
@@ -42,21 +48,24 @@ const Navbar = () => {
   }, [location.pathname]
   );
   
+  const logout = () => {
+    localStorage.removeItem('userData');
+    localStorage.removeItem('userIncome');
+    localStorage.removeItem('userExpenses');
+    window.location.href = '/';
+  }
 
   return (
-    <nav className={classNames(styles.nav, styles.hidden)}>
-      <span id='myPageTitle' className={styles.pageTitle}>{pageTitle}</span>
-      <ul>
-        <li>
-          <Link to='/home'>Home</Link>
-        </li>
-        <li>
-          <Link to='/myAccount'>My Account</Link>
-        </li>
-        <li>
-          <Link to='/settings'>Settings</Link>
-        </li>
-      </ul>
+    <nav className={classNames(styles.nav)}>
+      <h2>{pageTitle}</h2>
+
+      <div className={styles.quickButtonContainer}>
+        <Link to='/home'>Home</Link>
+        <Link to='/myAccount'>My Account</Link>
+        <Link to='/settings'>Settings</Link>
+        <Link to='/' className={styles.logout} onClick={logout}>Log Out</Link>
+      </div>
+      
     </nav>
   )
 }

@@ -38,8 +38,10 @@
 }
 
 .inherit {
-  height: inherit;
+  height: 100vh;
   width: inherit;
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {
@@ -108,4 +110,8 @@ label {
 h1 {
   font-size: 2vw;
   text-align: center;
+}
+
+.main {
+  flex: 1;
 }
