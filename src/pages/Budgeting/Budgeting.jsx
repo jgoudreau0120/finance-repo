@@ -2,7 +2,9 @@ import styles from './Budgeting.module.css';
 
 const Budgeting = () => {
   return(
-    <div></div>
+    <div className={styles.budgeting}>
+      This is budgeting
+    </div>
   )
 }
 

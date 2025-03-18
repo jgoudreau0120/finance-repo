@@ -1,0 +1,9 @@
+.budgeting {
+  display: flex;
+  background-color: steelblue;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: auto;
+}

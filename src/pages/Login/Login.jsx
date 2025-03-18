@@ -3,12 +3,11 @@ import '../../App.css';
 import styles from './Login.module.css';
 import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import { useNavigate } from "react-router-dom";
-import Tile from '../../components/Tile/Tile';
 
 const Login = () => {
 
@@ -21,12 +20,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('userData');
+    if (loggedInUser != null) {
+      setUser(JSON.parse(loggedInUser));
+      const income = JSON.parse(localStorage.getItem('userIncome'));
+      const expenses = JSON.parse(localStorage.getItem('userExpenses'));
+      updateFinances('income', income);
+      updateFinances('expenses', expenses);
+      navigate('/home');
+    }
+    else{
+      navigate('/');
+    }
+  }, []);
+
   const handleSignIn = async () => {
     if (username === "" || password === ""){
       alert("Please enter both a username and password.")
       return;
     }
-
+    
     //First pull user data
     try {
       const response = await axios.post(`${apiUrl}/check-login`, {username, password});
@@ -35,6 +49,8 @@ const Login = () => {
       if (user) {
         alert(response.data.message);
         setUser(user);
+        localStorage.setItem('userData', JSON.stringify(user));
+
         navigate('/home');
         //Pull income
         try {
@@ -43,6 +59,7 @@ const Login = () => {
   
           if (income) {
             updateFinances('income', income);
+            localStorage.setItem('userIncome', JSON.stringify(income));
           }
           else {
             alert("Couldn't pull income for user")
@@ -58,6 +75,7 @@ const Login = () => {
   
           if (expenses) {
             updateFinances('expenses', expenses);
+            localStorage.setItem('userExpenses', JSON.stringify(expenses));
           }
           else {
             alert("Couldn't pull expenses for user")

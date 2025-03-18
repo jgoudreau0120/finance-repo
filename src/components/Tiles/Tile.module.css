@@ -16,7 +16,6 @@
   min-width: 250px;
   max-width: 30%;
   height: 250px;
-  height: 250px;
   margin: 10px;
   padding: 10px;
 }
@@ -27,6 +26,11 @@
 
 .tile:hover h3 {
   color:darkblue;
+}
+
+.tile h3:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .header {

@@ -1,0 +1,27 @@
+.expenseTile {
+  display: flex;
+  border-radius: 10px;
+  border: 3px solid black;
+  flex-direction: column;
+  /*justify controls main axis, align controls cross axis*/
+  align-items: center;
+  justify-content: center;
+  /*horizontal offset, vertical offset, blur radius, color (rgb opacity)*/
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  background-color: cadetblue;
+  color:white;
+  transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
+  flex: 1;
+  width: 90%;
+  margin: 20px;
+  padding: 10px;
+  min-height: 90px;
+}
+
+.expenseTile:hover {
+  transform: scale(1.05);
+}
+
+.expenseTile:hover h3 {
+  color:darkblue;
+}

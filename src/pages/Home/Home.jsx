@@ -2,12 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFinances } from '../../FinancialContext';
 import { useUser } from '../../UserContext';
 import styles from './Home.module.css';
-import Tile from '../../components/Tile/Tile';
+import Tile from '../../components/Tiles/Tile';
 import '../../App.css';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { user } = useUser();
   const { finances } = useFinances();
+  const navigate = useNavigate();
+
   let expenseTotal = 0;
   let expenseEntries = [];
 
@@ -26,19 +29,28 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.tileRow}>
-        <Tile title='Budgeting'>
+        <Tile title='Budgeting' link='/budgeting'>
 
         </Tile>
 
         <Tile title='Income'>
           <div>
-            Your Yearly Income: ${finances.income}
+            <h4>
+              {parseFloat(finances.income).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+              })}
+            </h4>
           </div>
-          
         </Tile>
 
         <Tile title='Expenses'>
-          <h4>${expenseTotal}</h4>
+          <h4>
+            {parseFloat(expenseTotal).toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            })}
+          </h4>
           <ol>
             {expenseEntries.map((entry) => (
               <li>{entry.ExpenseName}: ${entry.Cost}/mo</li>
