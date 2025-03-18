@@ -31,11 +31,20 @@ const Navbar = () => {
         documentTitle = 'Settings';
         break;
 
+      case '/budgeting':
+        setPageHeader('Budgeting');
+        documentTitle = 'Budgeting';
+        break;
+
+      case '/income':
+        setPageHeader('Income Tracker');
+        documentTitle = 'Income Tracker';
+        break;
+
       case '/expenses':
         setPageHeader('Expenses');
         documentTitle = 'Expenses';
         break;
-
       
       default:
         setPageHeader('Login');

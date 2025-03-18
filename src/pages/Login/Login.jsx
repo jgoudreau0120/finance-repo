@@ -30,7 +30,7 @@ const Login = () => {
       updateFinances('expenses', expenses);
       navigate('/home');
     }
-    else{
+    else {
       navigate('/');
     }
   }, []);
