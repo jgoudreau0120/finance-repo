@@ -2,10 +2,10 @@
   display: flex;
   border-radius: 10px;
   border: 3px solid black;
-  flex-direction: column;
+  flex-direction: row;
   /*justify controls main axis, align controls cross axis*/
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   /*horizontal offset, vertical offset, blur radius, color (rgb opacity)*/
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   background-color: cadetblue;
@@ -13,7 +13,7 @@
   transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
   flex: 1;
   width: 90%;
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
   min-height: 90px;
 }
@@ -24,4 +24,45 @@
 
 .expenseTile:hover h3 {
   color:darkblue;
+}
+
+.actionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  height: 100%;
+}
+
+.actionContainer img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border: 5px solid white;
+  border-radius: 10px;
+  margin: 3px;
+  padding: 5px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.editButton {
+  transition: border-color 0.2s ease-in-out;
+}
+
+.deleteButton {
+  transition: border-color 0.2s ease-in-out;
+}
+
+.editButton:hover {
+  border-color: blue;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  border-color: blue;
+  cursor: pointer;
 }

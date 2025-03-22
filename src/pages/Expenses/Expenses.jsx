@@ -36,7 +36,7 @@ const Expenses = () => {
       <div className={styles.expenseTileContainer}>
         
         {expenseEntries.map((entry) => (
-          <ExpenseTile name={entry.ExpenseName} cost={entry.Cost}></ExpenseTile>
+          <ExpenseTile name={entry.ExpenseName} cost={entry.Cost} key={entry.id}></ExpenseTile>
         ))}
         
       </div>
