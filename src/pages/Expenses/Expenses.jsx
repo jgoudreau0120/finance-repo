@@ -2,6 +2,7 @@ import styles from './Expenses.module.css';
 import ExpenseTile from '../../components/Tiles/ExpenseTile';
 import { useFinances } from '../../FinancialContext';
 import Tile from '../../components/Tiles/Tile';
+import AddModal from '../../components/Modals/AddModal';
 
 const Expenses = () => {
 
@@ -22,9 +23,9 @@ const Expenses = () => {
   }
 
   const revealAddModal = () => {
-
+    
   }
-  
+
   return(
     <div className={styles.expenses}>
       <div className={styles.header}>
@@ -46,7 +47,11 @@ const Expenses = () => {
         <div className={styles.addExpenseContainer}>
           <img src='/addicon.png' className={styles.addIcon} onClick={revealAddModal} alt='Add Expense Icon'/>
         </div>
+
+        <AddModal></AddModal>
       </div>
+
+      
 
     </div>
   )

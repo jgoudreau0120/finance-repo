@@ -1,0 +1,19 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  width: 50%;
+  background-color:darkgrey;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
