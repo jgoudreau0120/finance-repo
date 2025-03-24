@@ -15,7 +15,7 @@
   width: 90%;
   margin: 10px;
   padding: 10px;
-  min-height: 90px;
+  min-height: 130px;
 }
 
 .expenseTile:hover {
@@ -33,6 +33,7 @@
   align-items: center;
   width: 10%;
   height: 100%;
+  padding: 20px;
 }
 
 .actionContainer img {
@@ -41,12 +42,12 @@
   justify-content: center;
   flex: 1;
   width: 100%;
-  height: auto;
-  border: 5px solid white;
+  height: 100%;
+  border: 3px solid white;
   border-radius: 10px;
-  margin: 3px;
-  padding: 5px;
+  margin: 1px;
   transition: border-color 0.2s ease-in-out;
+  min-width: 50px;
 }
 
 .editButton {

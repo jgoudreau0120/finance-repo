@@ -1,6 +1,7 @@
 import styles from './Expenses.module.css';
 import ExpenseTile from '../../components/Tiles/ExpenseTile';
 import { useFinances } from '../../FinancialContext';
+import Tile from '../../components/Tiles/Tile';
 
 const Expenses = () => {
 
@@ -20,6 +21,10 @@ const Expenses = () => {
     expenseTotal = parseFloat(expenseTotal.toFixed(2));
   }
 
+  const revealAddModal = () => {
+
+  }
+  
   return(
     <div className={styles.expenses}>
       <div className={styles.header}>
@@ -38,9 +43,11 @@ const Expenses = () => {
         {expenseEntries.map((entry) => (
           <ExpenseTile name={entry.ExpenseName} cost={entry.Cost} key={entry.id}></ExpenseTile>
         ))}
-        
+        <div className={styles.addExpenseContainer}>
+          <img src='/addicon.png' className={styles.addIcon} onClick={revealAddModal} alt='Add Expense Icon'/>
+        </div>
       </div>
-      
+
     </div>
   )
 }

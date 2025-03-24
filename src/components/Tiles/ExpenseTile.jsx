@@ -2,6 +2,14 @@ import styles from './ExpenseTile.module.css';
 
 const ExpenseTile = ({name, cost}) => {
   
+  const revealEditModal = (name, cost) => {
+
+  }
+
+  const revealDeleteModal = () => {
+
+  }
+
   return(
     <div className={styles.expenseTile}>
 
@@ -16,8 +24,8 @@ const ExpenseTile = ({name, cost}) => {
       </div>
 
       <div className={styles.actionContainer}>
-        <img src='/editicon.png' className={styles.editButton} alt='Edit Icon'/>
-        <img src='/deleteicon.png' className={styles.deleteButton} alt='Delete Icon'/>
+        <img src='/editicon.png' className={styles.editButton} onClick={() => revealEditModal(name, cost)} alt='Edit Icon'/>
+        <img src='/deleteicon.png' className={styles.deleteButton} onClick={() => revealDeleteModal(name, cost)} alt='Delete Icon'/>
       </div>
 
     </div>
