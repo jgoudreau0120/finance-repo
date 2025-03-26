@@ -2,11 +2,12 @@ import react, { useEffect, useState } from 'react';
 import styles from './Navbar.module.css';
 import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
 import classNames from 'classnames';
+import { useUser } from '../../UserContext';
 
 const Navbar = () => {
 
   const [pageTitle, setPageHeader] = useState('');
-
+  const { user } = useUser();
   //Grab the url to determine how to set the title of the page
   const location = useLocation();
 
@@ -63,6 +64,9 @@ const Navbar = () => {
     localStorage.removeItem('userExpenses');
     window.location.href = '/';
   }
+
+  if(user == null)
+    return null;
 
   return (
     <nav className={classNames(styles.nav)}>

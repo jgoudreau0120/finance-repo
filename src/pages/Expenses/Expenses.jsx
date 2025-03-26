@@ -3,12 +3,14 @@ import ExpenseTile from '../../components/Tiles/ExpenseTile';
 import { useFinances } from '../../FinancialContext';
 import Tile from '../../components/Tiles/Tile';
 import AddModal from '../../components/Modals/AddModal';
+import { useState } from 'react';
 
 const Expenses = () => {
 
   let expenseTotal = 0;
   let expenseEntries = [];
   const { finances } = useFinances();
+  const [addModalOpen, setModalOpen] = useState(false);
 
   //Make calculations with expenses
   if (finances.expenses.length > 0){
@@ -20,10 +22,6 @@ const Expenses = () => {
     }
 
     expenseTotal = parseFloat(expenseTotal.toFixed(2));
-  }
-
-  const revealAddModal = () => {
-    
   }
 
   return(
@@ -45,10 +43,10 @@ const Expenses = () => {
           <ExpenseTile name={entry.ExpenseName} cost={entry.Cost} key={entry.id}></ExpenseTile>
         ))}
         <div className={styles.addExpenseContainer}>
-          <img src='/addicon.png' className={styles.addIcon} onClick={revealAddModal} alt='Add Expense Icon'/>
+          <img src='/addicon.png' className={styles.addIcon} onClick={() => {setModalOpen(true)}} alt='Add Expense Icon'/>
         </div>
 
-        <AddModal></AddModal>
+        <AddModal isOpen={addModalOpen} close={() => {setModalOpen(false)}}></AddModal>
       </div>
 
       
