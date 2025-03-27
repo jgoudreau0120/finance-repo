@@ -14,7 +14,7 @@ const DeleteModal = ({isOpen, close, expense}) => {
 
   const submitDeletion = async () => {
     try {
-      const response = await axios.delete(`${apiUrl}/delete-expense`, {username: user.Username, expenseName: expense.ExpenseName});
+      const response = await axios.post(`${apiUrl}/delete-expense`, {username: user.Username, expenseName: expense.ExpenseName});
       alert(`${expense.ExpenseName} was deleted from your expenses!`);
 
       try {
