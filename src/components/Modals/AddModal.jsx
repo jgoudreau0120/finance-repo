@@ -57,6 +57,7 @@ const AddModal = ({isOpen, close}) => {
     catch (e) {
       alert(`Could not insert new expense`);
     }
+    close();
   }
 
   if(!isOpen)

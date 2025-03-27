@@ -35,6 +35,7 @@ const DeleteModal = ({isOpen, close, expense}) => {
     catch (e) {
       alert(`Could not delete expense`);
     }
+    close();
   }
 
   if(!isOpen)

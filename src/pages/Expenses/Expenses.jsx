@@ -33,7 +33,8 @@ const Expenses = () => {
     <div className={styles.expenses}>
       <div className={styles.header}>
         <h2>
-          My Monthly Expenses
+          <strong>My Monthly Expenses</strong>
+          
         </h2>
         <h3>
           {parseFloat(expenseTotal).toLocaleString('en-US', {

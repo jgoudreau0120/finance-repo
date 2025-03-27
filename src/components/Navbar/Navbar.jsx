@@ -70,7 +70,10 @@ const Navbar = () => {
 
   return (
     <nav className={classNames(styles.nav)}>
-      <h2>{pageTitle}</h2>
+      <div className={styles.pageTitleContainer}>
+        <h2 className={styles.pageTitle}>{pageTitle}</h2>
+      </div>
+      
 
       <div className={styles.quickButtonContainer}>
         <Link to='/home'>Home</Link>

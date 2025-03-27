@@ -1,6 +1,6 @@
 .expenses {
   display: flex;
-  background-color: steelblue;
+  background-color: rgb(68, 15, 15);
   height: 100%;
   width: 100%;
   flex-direction: column;
@@ -26,8 +26,7 @@
 
 .header {
   display: flex;
-  color: rgb(0, 0, 0);
-  /*left right*/
+  color: rgb(255, 0, 0);
   align-items: center;
   flex-direction: column;
   margin: 0;
