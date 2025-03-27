@@ -4,6 +4,8 @@ import { useFinances } from '../../FinancialContext';
 import Tile from '../../components/Tiles/Tile';
 import AddModal from '../../components/Modals/AddModal';
 import { useState } from 'react';
+import DeleteModal from '../../components/Modals/DeleteModal';
+import EditModal from '../../components/Modals/EditModal';
 
 const Expenses = () => {
 
@@ -11,6 +13,9 @@ const Expenses = () => {
   let expenseEntries = [];
   const { finances } = useFinances();
   const [addModalOpen, setModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [currentExpense, setCurrentExpense] = useState(null);
 
   //Make calculations with expenses
   if (finances.expenses.length > 0){
@@ -40,13 +45,15 @@ const Expenses = () => {
       <div className={styles.expenseTileContainer}>
         
         {expenseEntries.map((entry) => (
-          <ExpenseTile name={entry.ExpenseName} cost={entry.Cost} key={entry.id}></ExpenseTile>
+          <ExpenseTile name={entry.ExpenseName} cost={entry.Cost} key={entry.id} openDeleteModal={() => {setDeleteModalOpen(true); setCurrentExpense(entry);}} openEditModal={() => {setEditModalOpen(true); setCurrentExpense(entry);}}></ExpenseTile>
         ))}
         <div className={styles.addExpenseContainer}>
           <img src='/addicon.png' className={styles.addIcon} onClick={() => {setModalOpen(true)}} alt='Add Expense Icon'/>
         </div>
 
         <AddModal isOpen={addModalOpen} close={() => {setModalOpen(false)}}></AddModal>
+        <DeleteModal isOpen={deleteModalOpen} expense={currentExpense} close={() => {setDeleteModalOpen(false)}}></DeleteModal>
+        <EditModal isOpen={editModalOpen} expense={currentExpense} close={() => {setEditModalOpen(false)}}></EditModal>
       </div>
 
       
