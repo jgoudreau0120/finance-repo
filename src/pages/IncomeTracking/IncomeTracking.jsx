@@ -10,10 +10,11 @@ const IncomeTracking = () => {
   const { updateFinances, finances } = useFinances();
   const [taxStatus, setTaxStatus] = useState(user.TaxFilingStatus);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
+  
 
   const updateTaxStatus = async (status) => {
     setTaxStatus(status);
-
+    
     try {
       const response = await axios.post(`${apiUrl}/change-tax-status`, { username: user.Username, newStatus: status});
       
@@ -21,6 +22,7 @@ const IncomeTracking = () => {
         const response2 = await axios.post(`${apiUrl}/pull-user`, { username: user.Username });
         const updatedUser = response2.data.user;
         setUser(updatedUser);
+        localStorage.setItem('userData', JSON.stringify(updatedUser));
       }
       catch (e) {
         alert(`Could not fetch updated user: ${user.Username}`);
@@ -44,7 +46,7 @@ const IncomeTracking = () => {
 
         <div className={styles.taxContainer}>
           <h4>Tax Filing Status</h4>
-          <select value={user.TaxFilingStatus} onChange={(event) => updateTaxStatus(event.target.value)}>
+          <select value={taxStatus} onChange={(event) => updateTaxStatus(event.target.value)}>
             <option value='Single'>Single</option>
             <option value='Married Filing Jointly'>Married Filing Jointly</option>
             <option value='Head of Household'>Head of Household</option>
