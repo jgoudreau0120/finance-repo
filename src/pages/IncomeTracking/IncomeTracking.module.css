@@ -1,9 +1,34 @@
 .incomeTracking {
   display: flex;
-  background-color: steelblue;
+  background-color: rgb(4, 85, 8);
   height: 100%;
   width: 100%;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   min-height: 100%;
   overflow: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(10, 191, 7);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+
+.taxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
 }

@@ -34,7 +34,6 @@ const Expenses = () => {
       <div className={styles.header}>
         <h2>
           <strong>My Monthly Expenses</strong>
-          
         </h2>
         <h3>
           {parseFloat(expenseTotal).toLocaleString('en-US', {

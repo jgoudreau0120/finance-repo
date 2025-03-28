@@ -73,7 +73,6 @@ const Navbar = () => {
       <div className={styles.pageTitleContainer}>
         <h2 className={styles.pageTitle}>{pageTitle}</h2>
       </div>
-      
 
       <div className={styles.quickButtonContainer}>
         <Link to='/home'>Home</Link>
@@ -81,7 +80,6 @@ const Navbar = () => {
         <Link to='/settings'>Settings</Link>
         <Link to='/' className={styles.logout} onClick={logout}>Log Out</Link>
       </div>
-      
     </nav>
   )
 }

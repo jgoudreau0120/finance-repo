@@ -1,6 +1,6 @@
 import styles from './ExpenseTile.module.css';
 
-const ExpenseTile = ({name, cost, openDeleteModal, openEditModal}) => {
+const ExpenseTile = ({name, cost, key, openDeleteModal, openEditModal}) => {
   
   const revealEditModal = (name, cost) => {
 

@@ -10,7 +10,7 @@ const AddModal = ({isOpen, close}) => {
   const [name, changeName] = useState('');
   const [cost, changeCost] = useState('Cost (without $)');
   const { user } = useUser();
-  const{ updateFinances, finances } = useFinances();
+  const { updateFinances, finances } = useFinances();
 
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
@@ -27,7 +27,6 @@ const AddModal = ({isOpen, close}) => {
     }
 
     changeCost(parseFloat(currentInputNumber));
-    
   }
 
   const submitAddition = async () => {

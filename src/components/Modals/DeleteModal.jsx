@@ -8,7 +8,7 @@ import { useFinances } from '../../FinancialContext';
 
 const DeleteModal = ({isOpen, close, expense}) => {
   const { user } = useUser();
-  const{ updateFinances, finances } = useFinances();
+  const { updateFinances, finances } = useFinances();
   
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
