@@ -18,10 +18,12 @@
 .pageTitleContainer {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .pageTitleContainer h2 {
   margin: 0;
+  min-width: 180px;
 }
 
 .quickButtonContainer {

@@ -1,0 +1,29 @@
+.taxTableContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.taxTable {
+  font-size: 17px;
+  color: black;
+  background-color: burlywood;
+}
+
+.taxTable td, th{
+  border: 2px solid rgb(0, 0, 0);
+  padding: 5px;
+}
+
+.highlighted {
+  background-color: yellow;
+}
+
+.taxLiabilityContainer {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

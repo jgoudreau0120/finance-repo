@@ -3,14 +3,16 @@ import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import { useState } from 'react';
 import axios from 'axios';
+import TaxTable from '../../components/TaxTable/TaxTable';
 
 const IncomeTracking = () => {
 
   const { user, setUser } = useUser();
   const { updateFinances, finances } = useFinances();
   const [taxStatus, setTaxStatus] = useState(user.TaxFilingStatus);
+  const [stateTaxRate, setStateRate] = useState(user.StateTaxRate);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
-  
+
 
   const updateTaxStatus = async (status) => {
     setTaxStatus(status);
@@ -33,15 +35,23 @@ const IncomeTracking = () => {
     }
   }
 
+  const calculateStateTax = () => {
+    let stateTaxTotal = 0;
+
+    stateTaxTotal = stateTaxRate * parseFloat(finances.income);
+  }
+
   return(
     <div className={styles.incomeTracking}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h2><strong>Income</strong></h2>
-        </div>
-
-        <div>
-
+          <h3>
+            {parseFloat(finances.income).toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            })}
+          </h3>
         </div>
 
         <div className={styles.taxContainer}>
@@ -49,9 +59,18 @@ const IncomeTracking = () => {
           <select value={taxStatus} onChange={(event) => updateTaxStatus(event.target.value)}>
             <option value='Single'>Single</option>
             <option value='Married Filing Jointly'>Married Filing Jointly</option>
+            <option value='Married Filing Separately'>Married Filing Separately</option>
             <option value='Head of Household'>Head of Household</option>
           </select>
+
+          <h4>Input State Tax Rate</h4>
+          <input value={stateTaxRate} placeholder='State Tax Rate' type='number' onChange={(event) => {calculateStateTax(); setStateRate(event.target.value)}}></input>
         </div>
+
+        <div className={styles.bracketTableContainer}>
+          <TaxTable></TaxTable>
+        </div>
+
       </div>
     </div>
   )
