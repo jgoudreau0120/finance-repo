@@ -37,8 +37,12 @@ const IncomeTracking = () => {
 
   const calculateStateTax = () => {
     let stateTaxTotal = 0;
-
-    stateTaxTotal = stateTaxRate * parseFloat(finances.income);
+    stateTaxTotal = stateTaxRate/100 * parseFloat(finances.income);
+    stateTaxTotal = parseFloat(stateTaxTotal).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    })
+    return stateTaxTotal;
   }
 
   return(
@@ -70,7 +74,7 @@ const IncomeTracking = () => {
         <div className={styles.bracketTableContainer}>
           <TaxTable></TaxTable>
         </div>
-
+        {calculateStateTax()}
       </div>
     </div>
   )
