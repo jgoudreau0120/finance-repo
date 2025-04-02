@@ -11,6 +11,7 @@ const IncomeTracking = () => {
   const { updateFinances, finances } = useFinances();
   const [taxStatus, setTaxStatus] = useState(user.TaxFilingStatus);
   const [stateTaxRate, setStateRate] = useState(user.StateTaxRate);
+  const [federalTax, setFederalTax] = useState(0);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
 
@@ -38,11 +39,16 @@ const IncomeTracking = () => {
   const calculateStateTax = () => {
     let stateTaxTotal = 0;
     stateTaxTotal = stateTaxRate/100 * parseFloat(finances.income);
-    stateTaxTotal = parseFloat(stateTaxTotal).toLocaleString('en-US', {
+    return stateTaxTotal;
+  }
+
+  const toUSD = (float) => {
+    let value = '';
+    value = parseFloat(float).toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD'
-    })
-    return stateTaxTotal;
+    });
+    return value;
   }
 
   return(
@@ -68,13 +74,26 @@ const IncomeTracking = () => {
           </select>
 
           <h4>Input State Tax Rate</h4>
-          <input value={stateTaxRate} placeholder='State Tax Rate' type='number' onChange={(event) => {calculateStateTax(); setStateRate(event.target.value)}}></input>
+          <input value={stateTaxRate} placeholder='State Tax Rate (%)' type='number' onChange={(event) => {calculateStateTax(); setStateRate(event.target.value)}}></input>
         </div>
+      </div>
 
-        <div className={styles.bracketTableContainer}>
-          <TaxTable></TaxTable>
+      <div className={styles.bracketTableContainer}>
+        <TaxTable setFederalTax={(tax) => setFederalTax(tax)}></TaxTable>
+        <div className={styles.stateTaxLiabilityContainer}>
+          <h3>Total State Tax Liability for 2025 =</h3>
+          <h4><strong>{isNaN(calculateStateTax()) ? '$0.00' : toUSD(calculateStateTax())}</strong></h4>
         </div>
-        {calculateStateTax()}
+      </div>
+
+      <div className={styles.totalTaxContainer}>
+        <h2 style={{color: 'rgb(10, 191, 7)'}}>{toUSD(parseFloat(finances.income))}</h2>
+        <h2>-</h2>
+        <h2 style={{color: 'red'}}>{toUSD(federalTax)}</h2>
+      </div>
+
+      <div className={styles.totalTaxContainer}>
+        <h2 style={{color: 'rgb(10, 191, 7)'}}>Post-Tax Income: {isNaN(calculateStateTax()) ? toUSD(finances.income) : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))}</h2>
       </div>
     </div>
   )

@@ -59,7 +59,7 @@ body, html {
   margin: 0;
 }
 
-input, button, label {
+input, button, label, select {
   padding: 10px;
   border-radius: 10px;
   border: none;

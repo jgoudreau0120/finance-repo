@@ -2,7 +2,7 @@ import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import styles from './TaxTable.module.css';
 
-const TaxTable = () => {
+const TaxTable = ({ setFederalTax }) => {
   const { updateFinances, finances } = useFinances();
   const { user, setUser } = useUser();
   let data = [];
@@ -103,6 +103,7 @@ const TaxTable = () => {
 
   return (
     <div className={styles.taxTableContainer}>
+      <div className={styles.taxLiabilityContainer}>
       <table className={styles.taxTable}>
         <thead>
           <tr>
@@ -118,7 +119,8 @@ const TaxTable = () => {
               const matchingRow = income >= arrayValue[0] && income <= arrayValue[1];
 
               if (matchingRow){
-                taxLiability = toUSD(arrayValue[2] + ((arrayValue[3]/100)*(finances.income - arrayValue[4])));
+                taxLiability = arrayValue[2] + ((arrayValue[3]/100)*(finances.income - arrayValue[4]));
+                setFederalTax(taxLiability);
               }
 
               return(
@@ -132,11 +134,9 @@ const TaxTable = () => {
           {lastRow}
         </tbody>
       </table>
-      <div className={styles.taxLiabilityContainer}>
         <h3>Total Federal Tax Liability for 2025 = </h3>
-        <h4>{taxLiability}</h4>
+        <h4><strong>{toUSD(taxLiability)}</strong></h4>
       </div>
-
     </div>
     
   )
