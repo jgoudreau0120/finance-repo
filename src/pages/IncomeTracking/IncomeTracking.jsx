@@ -12,6 +12,7 @@ const IncomeTracking = () => {
   const [taxStatus, setTaxStatus] = useState(user.TaxFilingStatus);
   const [stateTaxRate, setStateRate] = useState(user.StateTaxRate);
   const [federalTax, setFederalTax] = useState(0);
+  const [remainingIncome, setRemainingIncome] = useState(finances.income);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
 
@@ -30,7 +31,29 @@ const IncomeTracking = () => {
       catch (e) {
         alert(`Could not fetch updated user: ${user.Username}`);
       }
-    } 
+    }
+    catch (e) {
+      alert(`Could not update tax filing status for user: ${user.Username}`);
+    }
+  }
+
+  const updateStateTaxRate = async (value) => {
+
+    calculateStateTax();
+    setStateRate(value);
+    try {
+      const response = await axios.post(`${apiUrl}/change-tax-rate`, { username: user.Username, newRate: value});
+      
+      try {
+        const response2 = await axios.post(`${apiUrl}/pull-user`, { username: user.Username });
+        const updatedUser = response2.data.user;
+        setUser(updatedUser);
+        localStorage.setItem('userData', JSON.stringify(updatedUser));
+      }
+      catch (e) {
+        alert(`Could not fetch updated user: ${user.Username}`);
+      }
+    }
     catch (e) {
       alert(`Could not update tax filing status for user: ${user.Username}`);
     }
@@ -74,7 +97,7 @@ const IncomeTracking = () => {
           </select>
 
           <h4>Input State Tax Rate</h4>
-          <input value={stateTaxRate} placeholder='State Tax Rate (%)' type='number' onChange={(event) => {calculateStateTax(); setStateRate(event.target.value)}}></input>
+          <input value={stateTaxRate} placeholder='State Tax Rate (%)' type='number' onChange={(event) => updateStateTaxRate(event.target.value)}></input>
         </div>
       </div>
 
