@@ -38,11 +38,11 @@ const IncomeTracking = () => {
   }
 
   const updateStateTaxRate = async (value) => {
-
     calculateStateTax();
     setStateRate(value);
+
     try {
-      const response = await axios.post(`${apiUrl}/change-tax-rate`, { username: user.Username, newRate: value});
+      const response = await axios.post(`${apiUrl}/change-tax-rate`, { username: user.Username, newRate: parseFloat(value)});
       
       try {
         const response2 = await axios.post(`${apiUrl}/pull-user`, { username: user.Username });
@@ -55,7 +55,7 @@ const IncomeTracking = () => {
       }
     }
     catch (e) {
-      alert(`Could not update tax filing status for user: ${user.Username}`);
+      alert(`Could not update tax rate for user: ${user.Username}`);
     }
   }
 
@@ -102,7 +102,7 @@ const IncomeTracking = () => {
       </div>
 
       <div className={styles.bracketTableContainer}>
-        <TaxTable setFederalTax={(tax) => setFederalTax(tax)}></TaxTable>
+        <TaxTable onFederalTaxChange={setFederalTax}></TaxTable>
         <div className={styles.stateTaxLiabilityContainer}>
           <h3>Total State Tax Liability for 2025 =</h3>
           <h4><strong>{isNaN(calculateStateTax()) ? '$0.00' : toUSD(calculateStateTax())}</strong></h4>

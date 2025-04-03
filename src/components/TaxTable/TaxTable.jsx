@@ -1,8 +1,9 @@
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import styles from './TaxTable.module.css';
+import { useEffect } from 'react';
 
-const TaxTable = ({ setFederalTax }) => {
+const TaxTable = ({ onFederalTaxChange }) => {
   const { updateFinances, finances } = useFinances();
   const { user, setUser } = useUser();
   let data = [];
@@ -18,6 +19,10 @@ const TaxTable = ({ setFederalTax }) => {
     });
     return value;
   }
+
+  useEffect(() => {
+    onFederalTaxChange(taxLiability);
+  }, [taxLiability, onFederalTaxChange]);
 
   switch (user.TaxFilingStatus){
     case 'Single':
@@ -120,7 +125,6 @@ const TaxTable = ({ setFederalTax }) => {
 
               if (matchingRow){
                 taxLiability = arrayValue[2] + ((arrayValue[3]/100)*(finances.income - arrayValue[4]));
-                setFederalTax(taxLiability);
               }
 
               return(
