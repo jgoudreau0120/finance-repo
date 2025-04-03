@@ -1,15 +1,15 @@
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import styles from './TaxTable.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const TaxTable = ({ onFederalTaxChange }) => {
   const { updateFinances, finances } = useFinances();
   const { user, setUser } = useUser();
+  let [taxLiability, setTaxLiability] = useState();
   let data = [];
   let firstRow = 0;
   let lastRow = 0;
-  let taxLiability = 0;
 
   const toUSD = (float) => {
     let value = '';
@@ -22,7 +22,12 @@ const TaxTable = ({ onFederalTaxChange }) => {
 
   useEffect(() => {
     onFederalTaxChange(taxLiability);
-  }, [taxLiability, onFederalTaxChange]);
+  }, [taxLiability]);
+
+  useEffect(() => {
+    setTaxLiability(taxLiability);
+  }, [finances.income, data]);
+
 
   switch (user.TaxFilingStatus){
     case 'Single':

@@ -18,7 +18,6 @@ const IncomeTracking = () => {
 
   const updateTaxStatus = async (status) => {
     setTaxStatus(status);
-    
     try {
       const response = await axios.post(`${apiUrl}/change-tax-status`, { username: user.Username, newStatus: status});
       
@@ -99,7 +98,7 @@ const IncomeTracking = () => {
           </select>
 
           <h4>Input State Tax Rate</h4>
-          <input value={stateTaxRate} placeholder='State Tax Rate (%)' type='number' onChange={(event) => updateStateTaxRate(event.target.value)}></input>
+          <input value={stateTaxRate} max={100} min={0} step={1} placeholder='State Tax Rate (%)' type='number' onChange={(event) => updateStateTaxRate(event.target.value)}></input>
         </div>
       </div>
 
@@ -114,7 +113,7 @@ const IncomeTracking = () => {
       <div className={styles.totalTaxContainer}>
         <h2 style={{color: 'rgb(10, 191, 7)'}}>{toUSD(parseFloat(finances.income))}</h2>
         <h2>-</h2>
-        <h2 style={{color: 'red'}}>{toUSD(federalTax)}</h2>
+        <h2 style={{color: 'red'}}>{toUSD(calculateStateTax() + federalTax)}</h2>
       </div>
 
       <div className={styles.totalTaxContainer}>
