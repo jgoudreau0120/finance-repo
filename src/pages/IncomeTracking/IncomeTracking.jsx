@@ -40,22 +40,24 @@ const IncomeTracking = () => {
   const updateStateTaxRate = async (value) => {
     calculateStateTax();
     setStateRate(value);
-
-    try {
-      const response = await axios.post(`${apiUrl}/change-tax-rate`, { username: user.Username, newRate: parseFloat(value)});
-      
+    
+    if (!isNaN(value)){
       try {
-        const response2 = await axios.post(`${apiUrl}/pull-user`, { username: user.Username });
-        const updatedUser = response2.data.user;
-        setUser(updatedUser);
-        localStorage.setItem('userData', JSON.stringify(updatedUser));
+        const response = await axios.post(`${apiUrl}/change-tax-rate`, { username: user.Username, newRate: parseFloat(value)});
+      
+        try {
+          const response2 = await axios.post(`${apiUrl}/pull-user`, { username: user.Username });
+          const updatedUser = response2.data.user;
+          setUser(updatedUser);
+          localStorage.setItem('userData', JSON.stringify(updatedUser));
+        }
+        catch (e) {
+          alert(`Could not fetch updated user: ${user.Username}`);
+        }
       }
       catch (e) {
-        alert(`Could not fetch updated user: ${user.Username}`);
+        alert(`Could not update tax rate for user: ${user.Username} with rate: ${value}`);
       }
-    }
-    catch (e) {
-      alert(`Could not update tax rate for user: ${user.Username}`);
     }
   }
 
