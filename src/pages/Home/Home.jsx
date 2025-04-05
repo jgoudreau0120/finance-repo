@@ -5,6 +5,7 @@ import styles from './Home.module.css';
 import Tile from '../../components/Tiles/Tile';
 import '../../App.css';
 import { useNavigate } from "react-router-dom";
+import IncomeChart from '../../components/Graphs/IncomeChart';
 
 const Home = () => {
   const { user } = useUser();
@@ -59,6 +60,10 @@ const Home = () => {
         </Tile>
 
         
+      </div>
+
+      <div className={styles.chartRow}>
+        <IncomeChart postTaxIncomeTotal={100000}></IncomeChart>
       </div>
 
     </div>
