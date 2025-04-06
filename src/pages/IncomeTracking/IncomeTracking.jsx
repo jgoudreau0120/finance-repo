@@ -1,7 +1,7 @@
 import styles from './IncomeTracking.module.css';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import TaxTable from '../../components/TaxTable/TaxTable';
 
@@ -15,6 +15,10 @@ const IncomeTracking = () => {
   const [remainingIncome, setRemainingIncome] = useState(finances.income);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
+
+  useEffect(() => {
+    updateFinances('postTaxIncome', parseFloat(finances.income) - (calculateStateTax() + federalTax));
+  }, [federalTax, taxStatus, stateTaxRate]);
 
   const updateTaxStatus = async (status) => {
     setTaxStatus(status);
@@ -39,7 +43,7 @@ const IncomeTracking = () => {
   const updateStateTaxRate = async (value) => {
     calculateStateTax();
     setStateRate(value);
-    
+
     if (!isNaN(value)){
       try {
         const response = await axios.post(`${apiUrl}/change-tax-rate`, { username: user.Username, newRate: parseFloat(value)});
@@ -74,6 +78,7 @@ const IncomeTracking = () => {
     });
     return value;
   }
+
 
   return(
     <div className={styles.incomeTracking}>

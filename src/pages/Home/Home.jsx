@@ -6,6 +6,7 @@ import Tile from '../../components/Tiles/Tile';
 import '../../App.css';
 import { useNavigate } from "react-router-dom";
 import IncomeChart from '../../components/Graphs/IncomeChart';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
   const { user } = useUser();
@@ -14,7 +15,6 @@ const Home = () => {
 
   let expenseTotal = 0;
   let expenseEntries = [];
-
   //Make calculations with expenses
   if (finances.expenses.length > 0){
     const expenses = finances.expenses;
@@ -27,6 +27,7 @@ const Home = () => {
     expenseTotal = parseFloat(expenseTotal.toFixed(2));
   }
 
+
   return (
     <div className={styles.home}>
       <div className={styles.tileRow}>
@@ -35,14 +36,20 @@ const Home = () => {
         </Tile>
 
         <Tile title='Income'>
-          <div>
-            <h4>
-              {parseFloat(finances.income).toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD'
-              })}
-            </h4>
-          </div>
+          <h4>Gross:</h4>
+          <h4>
+            {parseFloat(finances.income).toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            })}
+          </h4>
+          <h4>Post-tax:</h4>
+          <h4>
+            {parseFloat(finances.postTaxIncome).toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            })}
+          </h4>
         </Tile>
 
         <Tile title='Expenses'>
@@ -63,7 +70,7 @@ const Home = () => {
       </div>
 
       <div className={styles.chartRow}>
-        <IncomeChart postTaxIncomeTotal={100000}></IncomeChart>
+        <IncomeChart postTaxIncomeTotal={finances.income}></IncomeChart>
       </div>
 
     </div>

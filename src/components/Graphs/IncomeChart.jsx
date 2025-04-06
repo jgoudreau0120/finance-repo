@@ -21,7 +21,7 @@ const IncomeChart = ({ postTaxIncomeTotal }) => {
     datasets: [
       {
         data: [expensesTotal, (postTaxIncomeTotal/12).toFixed(2)],
-        backgroundColor: ['#0f0', '#f00'],
+        backgroundColor: [ '#f00', '#0f0'],
         borderColor: 'transparent',
         borderWidth: 3
       }

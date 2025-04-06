@@ -10,6 +10,7 @@ const TaxTable = ({ onFederalTaxChange }) => {
   let data = [];
   let firstRow = 0;
   let lastRow = 0;
+  let lastRowData = [];
 
   const toUSD = (float) => {
     let value = '';
@@ -36,10 +37,18 @@ const TaxTable = ({ onFederalTaxChange }) => {
         <td>10% of taxable income</td>
         </tr>;
 
-      lastRow = <tr>
+      if (finances.income > 626351){
+        lastRow = <tr className={styles.highlighted}>
+          <td>{toUSD(626351)} and over</td>
+          <td>{toUSD(188769.75)} + 37% of the amount over {toUSD(626350)}</td>
+          </tr>;
+      }
+      else {
+        lastRow = <tr>
         <td>{toUSD(626351)} and over</td>
         <td>{toUSD(188769.75)} + 37% of the amount over {toUSD(626350)}</td>
         </tr>;
+      }
 
       data = [
         [11926, 48475, 1193, 12, 11925],
@@ -48,6 +57,7 @@ const TaxTable = ({ onFederalTaxChange }) => {
         [197301, 250525, 40199, 32, 197300],
         [250526, 626350, 57231, 35, 250525]
       ];
+      lastRowData = [188769.75, 37, 626350];
       break;
 
     case 'Married Filing Jointly':
@@ -56,10 +66,18 @@ const TaxTable = ({ onFederalTaxChange }) => {
         <td>10% of taxable income</td>
         </tr>;
 
-      lastRow = <tr>
+      if (finances.income > 751601){
+        lastRow = <tr className={styles.highlighted}>
         <td>{toUSD(751601)} and over</td>
         <td>{toUSD(202154.50)} + 37% of the amount over {toUSD(751600)}</td>
         </tr>;
+      }
+      else {
+        lastRow = <tr>
+        <td>{toUSD(751601)} and over</td>
+        <td>{toUSD(202154.50)} + 37% of the amount over {toUSD(751600)}</td>
+        </tr>;
+      }
 
       data = [
         [23851, 96950, 2385, 12, 23850],
@@ -68,6 +86,7 @@ const TaxTable = ({ onFederalTaxChange }) => {
         [394601, 501050, 80398, 32, 394600],
         [501051, 751600, 114462, 35, 501050]
       ];
+      lastRowData = [202154.50, 37, 751600];
       break;
 
     case 'Married Filing Separately':
@@ -76,10 +95,18 @@ const TaxTable = ({ onFederalTaxChange }) => {
         <td>10% of taxable income</td>
         </tr>;
 
-      lastRow = <tr>
+      if (finances.income > 375801){
+        lastRow = <tr className={styles.highlighted}>
         <td>{toUSD(375801)} and over</td>
         <td>{toUSD(101077.25)} + 37% of the amount over {toUSD(375800)}</td>
         </tr>;
+      }
+      else {
+        lastRow = <tr>
+        <td>{toUSD(375801)} and over</td>
+        <td>{toUSD(101077.25)} + 37% of the amount over {toUSD(375800)}</td>
+        </tr>;
+      }
 
       data = [
         [11926, 48475, 1193, 12, 11925],
@@ -88,6 +115,7 @@ const TaxTable = ({ onFederalTaxChange }) => {
         [197301, 250525, 40199, 32, 197300],
         [250526, 375800, 57231, 35, 250525]
       ];
+      lastRowData = [101077.25, 37, 375800];
       break;
 
     case 'Head of Household':
@@ -96,10 +124,18 @@ const TaxTable = ({ onFederalTaxChange }) => {
         <td>10% of taxable income</td>
         </tr>;
 
-      lastRow = <tr>
+      if (finances.income > 626351){
+        lastRow = <tr className={styles.highlighted}>
         <td>{toUSD(626351)} and over</td>
         <td>{toUSD(187031.5)} + 37% of the amount over {toUSD(626350)}</td>
         </tr>;
+      }
+      else {
+        lastRow = <tr>
+        <td>{toUSD(626351)} and over</td>
+        <td>{toUSD(187031.5)} + 37% of the amount over {toUSD(626350)}</td>
+        </tr>;
+      }
 
       data = [
         [17001, 64850, 1700, 12, 17000],
@@ -108,6 +144,7 @@ const TaxTable = ({ onFederalTaxChange }) => {
         [197301, 250500, 38460, 32, 197300],
         [250001, 626350, 55484, 35, 250500]
       ];
+      lastRowData = [187031.50, 37, 626350];
       break;
   }
 
@@ -130,6 +167,10 @@ const TaxTable = ({ onFederalTaxChange }) => {
 
               if (matchingRow){
                 taxLiability = arrayValue[2] + ((arrayValue[3]/100)*(finances.income - arrayValue[4]));
+              }
+
+              if (finances.income > data[4][1]){
+                taxLiability = lastRowData[0] + ((lastRowData[1]/100) * (finances.income - lastRowData[2]));
               }
 
               return(
