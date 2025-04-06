@@ -45,6 +45,7 @@ const CreateUser = () => {
     catch (e) {
       alert('Error creating user or username already exists');
     }
+    setUserData({firstName: "", lastName: "", username: "", password: "", initialIncome: "", initialStateRate: ""});
 
   };
 

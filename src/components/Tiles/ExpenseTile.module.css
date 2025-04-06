@@ -16,6 +16,7 @@
   margin: 10px;
   padding: 10px;
   min-height: 130px;
+  max-height: 130px;
 }
 
 .expenseTile:hover {
