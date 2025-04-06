@@ -4,7 +4,7 @@ import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import styles from './IncomeChart.module.css';
 
-const IncomeChart = ({ postTaxIncomeTotal }) => {
+const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
   const { user } = useUser();
   const { updateFinances, finances } = useFinances();
   const expenses = finances.expenses;
@@ -17,11 +17,11 @@ const IncomeChart = ({ postTaxIncomeTotal }) => {
   }
 
   const chartData = {
-    labels: ['Monthly Expenses', 'Remaining Income'],
+    labels: ['Monthly Expenses', 'Remaining Income', 'Income Tax'],
     datasets: [
       {
-        data: [expensesTotal, (postTaxIncomeTotal/12).toFixed(2)],
-        backgroundColor: [ '#f00', '#0f0'],
+        data: [expensesTotal, (postTaxIncomeTotal / 12 - expensesTotal).toFixed(2), (totalIncomeTax / 12).toFixed(2)],
+        backgroundColor: [ '#f00', '#0f0', '#00f'],
         borderColor: 'transparent',
         borderWidth: 3
       }

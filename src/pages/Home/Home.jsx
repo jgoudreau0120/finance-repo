@@ -66,11 +66,10 @@ const Home = () => {
           </ol>
         </Tile>
 
-        
       </div>
 
       <div className={styles.chartRow}>
-        <IncomeChart postTaxIncomeTotal={finances.income}></IncomeChart>
+        <IncomeChart postTaxIncomeTotal={finances.postTaxIncome} totalIncomeTax={(finances.income - finances.postTaxIncome)}></IncomeChart>
       </div>
 
     </div>

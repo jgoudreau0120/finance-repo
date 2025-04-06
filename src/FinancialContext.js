@@ -28,7 +28,7 @@ export const FinancialProvider = ({ children }) => {
           [48476, 103350, 5579, 0.22, 48475],
           [103351, 197300, 17651, 0.24, 103350],
           [197301, 250525, 40199, 0.32, 197300],
-          [250526, 626350, 57231, 0.35, 250525],
+          [250526, 626350, 57231, 0.35, 250525]
         ];
   
         if (income < data[0][0]){
@@ -158,7 +158,7 @@ export const FinancialProvider = ({ children }) => {
     setFinances(prevFinance => {
       return {
         ...prevFinance,
-        postTaxIncome: (income - federalTaxOwed - stateTaxOwed)
+        postTaxIncome: income - federalTaxOwed - stateTaxOwed
       };
     });
 
