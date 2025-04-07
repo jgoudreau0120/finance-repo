@@ -11,6 +11,7 @@ import Budgeting from './pages/Budgeting/Budgeting';
 import './App.css';
 import { UserProvider } from './UserContext';
 import { FinancialProvider } from './FinancialContext';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   return (

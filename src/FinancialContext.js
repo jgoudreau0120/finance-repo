@@ -1,20 +1,43 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useUser } from "./UserContext";
+
 const FinancialContext = createContext();
 
 export const FinancialProvider = ({ children }) => {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+  
   const [finances, setFinances] = useState({
     expenses: [],
     income: 0,
     postTaxIncome: 0
   });
 
+  //user reloads page
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('userData');
+
+    if (loggedInUser != null) {
+      setUser(JSON.parse(loggedInUser));
+      const income = JSON.parse(localStorage.getItem('userIncome'));
+      const expenses = JSON.parse(localStorage.getItem('userExpenses'));
+      updateFinances('income', income);
+      updateFinances('expenses', expenses);
+    }
+    else {
+      setFinances({
+        expenses: [],
+        income: 0,
+        postTaxIncome: 0
+      });
+    }
+  }, [setUser, setFinances]);
+
   useEffect(() => {
     if (user && finances.income > 0) {
       calculatePostTaxIncome();
     }
-  }, [user, finances.income]);  
+  }, [user, finances.income]);
+
 
   const calculatePostTaxIncome = () => {
     let federalTaxOwed = 0;

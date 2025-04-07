@@ -9,16 +9,22 @@ const IncomeTracking = () => {
 
   const { user, setUser } = useUser();
   const { updateFinances, finances } = useFinances();
-  const [taxStatus, setTaxStatus] = useState(user.TaxFilingStatus);
-  const [stateTaxRate, setStateRate] = useState(user.StateTaxRate);
+  const [taxStatus, setTaxStatus] = useState('Single');
+  const [stateTaxRate, setStateRate] = useState(0);
   const [federalTax, setFederalTax] = useState(0);
   const [remainingIncome, setRemainingIncome] = useState(finances.income);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
+  useEffect(() => {
+    if (user) {
+      setTaxStatus(user.TaxFilingStatus || 'Single');
+      setStateRate(user.StateTaxRate || 0);
+    }
+  }, [user]);
 
   useEffect(() => {
     updateFinances('postTaxIncome', parseFloat(finances.income) - (calculateStateTax() + federalTax));
-  }, [federalTax, taxStatus, stateTaxRate]);
+  }, [federalTax, taxStatus, stateTaxRate, user]);
 
   const updateTaxStatus = async (status) => {
     setTaxStatus(status);
@@ -79,6 +85,9 @@ const IncomeTracking = () => {
     return value;
   }
 
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return(
     <div className={styles.incomeTracking}>
