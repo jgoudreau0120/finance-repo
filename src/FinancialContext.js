@@ -1,7 +1,12 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useUser } from "./UserContext";
+import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
+import classNames from 'classnames';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const FinancialContext = createContext();
+const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
 export const FinancialProvider = ({ children }) => {
   const { user, setUser } = useUser();
@@ -12,16 +17,48 @@ export const FinancialProvider = ({ children }) => {
     postTaxIncome: 0
   });
 
+  const fetchFinances = async (username) => {
+    //Pull income
+    try {
+      const response = await axios.get(`${apiUrl}/pull-income/${username}`);
+      const income = response.data.income;
+
+      if (income) {
+        updateFinances('income', income);
+        localStorage.setItem('userIncome', JSON.stringify(income));
+      }
+      else {
+        alert("Couldn't pull income for user")
+      }
+    }
+    catch (e) {
+      alert(`Could not find income with username: ${username}`);
+    }
+    //Pull expenses
+    try {
+      const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
+      const expenses = response.data.expenses;
+
+      if (expenses) {
+        updateFinances('expenses', expenses);
+        localStorage.setItem('userExpenses', JSON.stringify(expenses));
+      }
+      else {
+        alert("Couldn't pull expenses for user")
+      }
+    }
+    catch (e) {
+      alert(`Could not find expenses with username: ${username}`);
+    }
+  };
+
   //user reloads page
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userData');
 
     if (loggedInUser != null) {
       setUser(JSON.parse(loggedInUser));
-      const income = JSON.parse(localStorage.getItem('userIncome'));
-      const expenses = JSON.parse(localStorage.getItem('userExpenses'));
-      updateFinances('income', income);
-      updateFinances('expenses', expenses);
+      fetchFinances(JSON.parse(loggedInUser).Username);
     }
     else {
       setFinances({
