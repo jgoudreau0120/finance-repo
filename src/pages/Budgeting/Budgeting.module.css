@@ -1,8 +1,8 @@
 .budgeting {
   display: flex;
   background-color: steelblue;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   flex-direction: column;
   min-height: 100%;
   overflow: auto;
