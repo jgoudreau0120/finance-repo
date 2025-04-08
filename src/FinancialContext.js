@@ -55,19 +55,25 @@ export const FinancialProvider = ({ children }) => {
   //user reloads page
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userData');
-
-    if (loggedInUser != null) {
-      setUser(JSON.parse(loggedInUser));
-      fetchFinances(JSON.parse(loggedInUser).Username);
-    }
-    else {
-      setFinances({
-        expenses: [],
-        income: 0,
-        postTaxIncome: 0
-      });
-    }
+  
+    const loadData = async () => {
+      if (loggedInUser != null) {
+        const userObj = JSON.parse(loggedInUser);
+        setUser(userObj);
+        await fetchFinances(userObj.Username);
+      } 
+      else {
+        setFinances({
+          expenses: [],
+          income: 0,
+          postTaxIncome: 0
+        });
+      }
+    };
+  
+    loadData();  // call the async function
   }, [setUser, setFinances]);
+  
 
   useEffect(() => {
     if (user && finances.income > 0) {

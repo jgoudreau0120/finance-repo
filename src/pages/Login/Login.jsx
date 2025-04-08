@@ -22,14 +22,19 @@ const Login = () => {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userData');
-    if (loggedInUser != null) {
-      setUser(JSON.parse(loggedInUser));
-      fetchFinances(JSON.parse(loggedInUser).Username);
-      navigate('/home');
+
+    const loadData = async () => {
+      if (loggedInUser != null) {
+        setUser(JSON.parse(loggedInUser));
+        await fetchFinances(JSON.parse(loggedInUser).Username);
+        navigate('/home');
+      }
+      else {
+        navigate('/');
+      }
     }
-    else {
-      navigate('/');
-    }
+
+    loadData();
   }, []);
 
   const fetchFinances = async (username) => {
