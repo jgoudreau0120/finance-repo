@@ -88,7 +88,6 @@ const Login = () => {
       else {
         alert("Invalid username or password!");
       }
-      
     }
     catch (e) {
       alert(`Could not find account with username: ${username}`);

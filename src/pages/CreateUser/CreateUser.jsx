@@ -63,7 +63,7 @@ const CreateUser = () => {
         <input id='username' name='submitRequires' placeholder='Username' value={userData.username} onChange={handleChange} onKeyUp={checkSubmit}></input>
         <input id='password' name='submitRequires' placeholder='Password' value={userData.password} onChange={handleChange} onKeyUp={checkSubmit}></input>
         <input id='initialIncome' type='number' name='submitRequires' placeholder='Starting Income' value={userData.initialIncome} onChange={handleChange} onKeyUp={checkSubmit}></input>
-        <input id='initialStateRate' type='number' name='submitRequires' placeholder='State Tax Rate (%)' value={userData.initialStateRate} onChange={handleChange} onKeyUp={checkSubmit}></input>
+        <input id='initialStateRate' type='number' name='submitRequires' placeholder='State Income Tax Rate (%)' value={userData.initialStateRate} onChange={handleChange} onKeyUp={checkSubmit}></input>
         <button id='submitButton' className='btn btn-success' onClick={handleSubmit} disabled={submitButtonState}>Create User</button>
         <Link to='/'><button className='btn btn-success'>Back To Login</button></Link>
       </div>
