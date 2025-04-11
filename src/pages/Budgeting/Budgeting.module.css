@@ -1,9 +1,54 @@
 .budgeting {
   display: flex;
   background-color: steelblue;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   min-height: 100%;
   overflow: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.budgetTileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+  height: 100%;
+  overflow: auto;
+}
+
+.budgetTileContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  display: flex;
+  color: rgb(0, 38, 255);
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+}
+
+.addBudgetContainer img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border: 3px solid white;
+  border-radius: 10px;
+  margin: 1px;
+  padding: 5px;
+  max-width: 100px;
+  max-height: 100px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.addIcon:hover{
+  border-color: blue;
+  cursor: pointer;
 }

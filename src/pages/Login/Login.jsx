@@ -70,6 +70,22 @@ const Login = () => {
     catch (e) {
       alert(`Could not find expenses with username: ${username}`);
     }
+    //Pull budget
+    try {
+      const response = await axios.get(`${apiUrl}/pull-budgeting/${username}`);
+      const budget = response.data.budget;
+
+      if (budget) {
+        updateFinances('budgetRecords', budget);
+        localStorage.setItem('userBudget', JSON.stringify(budget));
+      }
+      else {
+        alert("Couldn't pull budget for user");
+      }
+    }
+    catch (e) {
+      alert(`Could not find budget with username: ${username}`);
+    }
   };
 
   const handleSignIn = async () => {

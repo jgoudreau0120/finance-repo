@@ -1,7 +1,6 @@
 import styles from './Expenses.module.css';
 import ExpenseTile from '../../components/Tiles/ExpenseTile';
 import { useFinances } from '../../FinancialContext';
-import Tile from '../../components/Tiles/Tile';
 import AddModal from '../../components/Modals/AddModal';
 import { useState } from 'react';
 import DeleteModal from '../../components/Modals/DeleteModal';
