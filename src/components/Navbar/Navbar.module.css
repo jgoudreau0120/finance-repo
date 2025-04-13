@@ -22,8 +22,8 @@
 }
 
 .pageTitleContainer h2 {
-  margin: 0;
   min-width: 180px;
+  padding: 10px;
 }
 
 .quickButtonContainer {

@@ -5,16 +5,30 @@ import { useFinances } from '../../FinancialContext';
 import styles from './Chart.module.css';
 
 const BudgetChart = ({ budgetTotal, budgetTotalPercent }) => {
-  const { user } = useUser();
-  const { updateFinances, finances } = useFinances();
-  const expenses = finances.expenses;
+  const { finances } = useFinances();
+  const budgets = finances.budgetRecords;
+
+  const labels = budgets.map((record) => record.Category);
+  const data = budgets.map((record) => record.PercentIncomeAllocated);
+
+  const getRandomColorHex = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      //Generates a random number between 0 and 15 (inclusive)
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  const colors = budgets.map(() => getRandomColorHex());
 
   const chartData = {
-    labels: ['Monthly Expenses', 'Remaining Income', 'Income Tax'],
+    labels: labels,
     datasets: [
       {
-        data: [],
-        backgroundColor: [ '#f00', '#0f0', '#00f'],
+        data: data,
+        backgroundColor: colors,
         borderColor: 'transparent',
         borderWidth: 3
       }
@@ -27,13 +41,22 @@ const BudgetChart = ({ budgetTotal, budgetTotalPercent }) => {
         labels: {
           color: '#fff'
         }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const label = context.label || '';
+            const value = context.raw;
+            return `${(value)}%`;
+          }
+        }
       }
     }
   };
 
   return(
     <div className={styles.chartContainer}>
-      <h4>Monthly Allocation Chart (USD)</h4>
+      <h4>Budget Chart</h4>
       <Doughnut data={chartData} options={options}></Doughnut>
     </div>
   )

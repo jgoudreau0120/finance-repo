@@ -1,12 +1,9 @@
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Bar, Doughnut, Line } from 'react-chartjs-2';
-import { useUser } from '../../UserContext';
+import { Doughnut } from 'react-chartjs-2';
 import { useFinances } from '../../FinancialContext';
 import styles from './Chart.module.css';
 
 const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
-  const { user } = useUser();
-  const { updateFinances, finances } = useFinances();
+  const { finances } = useFinances();
   const expenses = finances.expenses;
 
   let expensesTotal = 0;
@@ -16,11 +13,20 @@ const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
     expensesTotal += parseFloat(expenses[i].Cost);
   }
 
+  const toUSD = (float) => {
+    let value = '';
+    value = parseFloat(float).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    });
+    return value;
+  };
+
   const chartData = {
     labels: ['Monthly Expenses', 'Remaining Income', 'Income Tax'],
     datasets: [
       {
-        data: [expensesTotal, (postTaxIncomeTotal / 12 - expensesTotal).toFixed(2), (totalIncomeTax / 12).toFixed(2)],
+        data: [(expensesTotal), (postTaxIncomeTotal / 12 - expensesTotal).toFixed(2), (totalIncomeTax / 12).toFixed(2)],
         backgroundColor: [ '#f00', '#0f0', '#00f'],
         borderColor: 'transparent',
         borderWidth: 3
@@ -28,11 +34,20 @@ const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
     ]
   };
 
+
   const options = {
     plugins: {
       legend: {
         labels: {
           color: '#fff'
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const value = context.raw;
+            return `${toUSD(value)}`;
+          }
         }
       }
     }
@@ -40,7 +55,7 @@ const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
 
   return(
     <div className={styles.chartContainer}>
-      <h4>Monthly Allocation Chart (USD)</h4>
+      <h4>Monthly Allocation Chart</h4>
       <Doughnut data={chartData} options={options}></Doughnut>
     </div>
   )

@@ -1,17 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFinances } from '../../FinancialContext';
-import { useUser } from '../../UserContext';
 import styles from './Home.module.css';
 import Tile from '../../components/Tiles/Tile';
 import '../../App.css';
-import { useNavigate } from "react-router-dom";
 import IncomeChart from '../../components/Graphs/IncomeChart';
-import { useState, useEffect } from 'react';
+import BudgetChart from '../../components/Graphs/BudgetChart';
 
 const Home = () => {
-  const { user } = useUser();
   const { finances } = useFinances();
-  const navigate = useNavigate();
 
   const toUSD = (float) => {
     let value = '';
@@ -34,19 +30,20 @@ const Home = () => {
       expenseEntries.push(expenses[i]);
     }
 
-    expenseTotal = parseFloat(expenseTotal.toFixed(2));
+    expenseTotal = parseFloat(expenseTotal);
   }
 
   let budgetTotalPercent = 0;
   let budgetTotal = 0;
+  let budgetEntries = [];
   //Make calculations with expenses
   if (finances.budgetRecords.length > 0){
-
-    for(let i = 0; i < finances.budgetRecords.length; i++){
-      budgetTotalPercent += finances.budgetRecords[i].PercentIncomeAllocated;
-      budgetTotal += (finances.budgetRecords[i].PercentIncomeAllocated / 100) * (finances.postTaxIncome - (expenseTotal * 12));
+    let budgets = finances.budgetRecords;
+    for(let i = 0; i < budgets.length; i++){
+      budgetTotalPercent += budgets[i].PercentIncomeAllocated;
+      budgetTotal += (budgets[i].PercentIncomeAllocated / 100) * (finances.postTaxIncome - (expenseTotal * 12));
+      budgetEntries.push(budgets[i]);
     }
-
   }
 
 
@@ -56,6 +53,14 @@ const Home = () => {
         <Tile title='Budgeting' link='/budgeting'>
           <h4>{budgetTotalPercent}% / 100%</h4>
           <h4>{toUSD(budgetTotal)} / {toUSD(finances.postTaxIncome - (expenseTotal * 12))}</h4>
+
+          <ul className={styles.expenseList}>
+            {budgetEntries.map((entry) => (
+              <li><h4 className={styles.name}>{entry.Category}:</h4><h4 className={styles.price}>{entry.PercentIncomeAllocated}%</h4></li>
+            ))}
+          </ul>
+
+          <BudgetChart></BudgetChart>
         </Tile>
 
         <Tile title='Income'>
@@ -72,7 +77,7 @@ const Home = () => {
 
         <Tile title='Expenses'>
           <h4>
-            {toUSD(expenseTotal)}
+            {toUSD(expenseTotal)}/mo
           </h4>
           <ul className={styles.expenseList}>
             {expenseEntries.map((entry) => (

@@ -29,7 +29,7 @@ const BudgetTile = ({ name, percent, key, openDeleteModal, openEditModal }) => {
       </div>
 
       <div>
-        <h3>{toUSD(((finances.postTaxIncome / 12 - expensesTotal) * (percent / 100)).toFixed(2))}</h3>
+        <h3>{toUSD((finances.postTaxIncome / 12 - expensesTotal) * (percent / 100))}</h3>
       </div>
 
       <div className={styles.actionContainer}>
