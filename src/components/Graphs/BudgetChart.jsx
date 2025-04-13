@@ -4,23 +4,16 @@ import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import styles from './Chart.module.css';
 
-const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
+const BudgetChart = ({ budgetTotal, budgetTotalPercent }) => {
   const { user } = useUser();
   const { updateFinances, finances } = useFinances();
   const expenses = finances.expenses;
-
-  let expensesTotal = 0;
-
-  //Calculate expenses total cost
-  for (let i = 0; i < expenses.length; i++){
-    expensesTotal += parseFloat(expenses[i].Cost);
-  }
 
   const chartData = {
     labels: ['Monthly Expenses', 'Remaining Income', 'Income Tax'],
     datasets: [
       {
-        data: [expensesTotal, (postTaxIncomeTotal / 12 - expensesTotal).toFixed(2), (totalIncomeTax / 12).toFixed(2)],
+        data: [],
         backgroundColor: [ '#f00', '#0f0', '#00f'],
         borderColor: 'transparent',
         borderWidth: 3
@@ -46,4 +39,4 @@ const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
   )
 }
 
-export default IncomeChart;
+export default BudgetChart;

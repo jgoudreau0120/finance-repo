@@ -13,6 +13,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  align-items: center;
   justify-content: space-around;
   gap: 15px;
   flex-grow: 1;
@@ -26,4 +27,28 @@
   justify-content: space-around;
   gap: 15px;
   flex-grow: 1;
+}
+
+.expenseList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 0;
+  width: 70%;
+}
+
+.expenseList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  text-align: left;
+}
+
+.price {
+  text-align: right;
 }

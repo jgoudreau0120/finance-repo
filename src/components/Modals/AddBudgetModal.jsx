@@ -51,14 +51,14 @@ const AddBudgetModal = ({isOpen, close}) => {
       catch (e) {
         alert(`Could not find budget with username: ${user.Username}`);
       }
-
-      changeName('');
-      changePercent('Percent of Post-tax income (%)');
     }
     catch (e) {
       alert(`Could not insert new budget category.`);
     }
     close();
+
+    changeName('');
+    changePercent('Percent of Post-tax income (%)')
   }
 
   if(!isOpen)

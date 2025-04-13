@@ -23,7 +23,7 @@ const BudgetTile = ({ name, percent, key, openDeleteModal, openEditModal }) => {
   return(
     <div className={styles.budgetTile}>
 
-      <div>
+      <div style={{width: '120px'}}>
         <h3>{name}</h3>
         <h3>{percent}%</h3>
       </div>

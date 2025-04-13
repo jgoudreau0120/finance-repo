@@ -16,6 +16,7 @@
   align-items: center;
   justify-content: space-around;
   width: 40%;
+  min-width: 320px;
   height: 100%;
   overflow: auto;
 }
