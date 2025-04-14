@@ -24,11 +24,11 @@
   transform: scale(1.05);
 }
 
-.tile:hover h3 {
+.tile:hover h1 {
   color:darkblue;
 }
 
-.tile h3:hover {
+.tile h1:hover {
   cursor: pointer;
   text-decoration: underline;
 }

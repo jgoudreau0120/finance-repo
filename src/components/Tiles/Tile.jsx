@@ -25,7 +25,7 @@ const Tile = ({ title, children, className }) => {
   return(
     <div className={styles.tile}>
       <div className={styles.header}>
-        <h3 onClick={() => navigate(`${titleLink}`)}>{title}</h3>
+        <h1 onClick={() => navigate(`${titleLink}`)}>{title}</h1>
       </div>
       <div className={styles.content}>
         {children}

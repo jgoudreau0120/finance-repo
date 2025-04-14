@@ -1,0 +1,10 @@
+
+.settings {
+  display: flex;
+  background-color:rgb(175, 210, 211);
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: auto;
+}

@@ -151,41 +151,44 @@ const TaxTable = ({ onFederalTaxChange }) => {
   return (
     <div className={styles.taxTableContainer}>
       <div className={styles.taxLiabilityContainer}>
-      <table className={styles.taxTable}>
-        <thead>
-          <tr>
-            <th>If Taxable Income Is:</th>
-            <th>Tax Due Is:</th>
-          </tr>
-        </thead>
-        <tbody>
-          {firstRow}
-          {
-            data.map((arrayValue) => {
-              const income = parseFloat(finances.income);
-              const matchingRow = income >= arrayValue[0] && income <= arrayValue[1];
+        <table className={styles.taxTable}>
+          <thead>
+            <tr>
+              <th>If Taxable Income Is:</th>
+              <th>Tax Due Is:</th>
+            </tr>
+          </thead>
+          <tbody>
+            {firstRow}
+            {
+              data.map((arrayValue) => {
+                const income = parseFloat(finances.income);
+                const matchingRow = income >= arrayValue[0] && income <= arrayValue[1];
 
-              if (matchingRow){
-                taxLiability = arrayValue[2] + ((arrayValue[3]/100)*(finances.income - arrayValue[4]));
-              }
+                if (matchingRow){
+                  taxLiability = arrayValue[2] + ((arrayValue[3]/100)*(finances.income - arrayValue[4]));
+                }
 
-              if (finances.income > data[4][1]){
-                taxLiability = lastRowData[0] + ((lastRowData[1]/100) * (finances.income - lastRowData[2]));
-              }
+                if (finances.income > data[4][1]){
+                  taxLiability = lastRowData[0] + ((lastRowData[1]/100) * (finances.income - lastRowData[2]));
+                }
 
-              return(
-                <tr className={matchingRow ? styles.highlighted : ''}>
-                  <td>{toUSD(arrayValue[0])} - {toUSD(arrayValue[1])}</td>
-                  <td>{toUSD(arrayValue[2])} + {arrayValue[3]}% of the amount over {toUSD(arrayValue[4])}</td>
-                </tr>
-              )
-            })
-          }
-          {lastRow}
-        </tbody>
-      </table>
+                return(
+                  <tr className={matchingRow ? styles.highlighted : ''}>
+                    <td>{toUSD(arrayValue[0])} - {toUSD(arrayValue[1])}</td>
+                    <td>{toUSD(arrayValue[2])} + {arrayValue[3]}% of the amount over {toUSD(arrayValue[4])}</td>
+                  </tr>
+                )
+              })
+            }
+            {lastRow}
+          </tbody>
+        </table>
         <h3>Total Federal Tax Liability for 2025 = </h3>
         <h4><strong>{toUSD(taxLiability)}</strong></h4>
+        <div>
+          
+        </div>
       </div>
     </div>
     

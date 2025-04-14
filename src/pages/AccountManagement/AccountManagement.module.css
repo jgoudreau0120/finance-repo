@@ -1,0 +1,26 @@
+.myAccount {
+  display: flex;
+  background-color:rgb(175, 210, 211);
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  overflow: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.container button {
+  background-color: rgb(28, 66, 103);
+  font-weight: bold;
+  margin-bottom: 0;
+}

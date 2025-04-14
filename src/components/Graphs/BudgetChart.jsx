@@ -8,6 +8,10 @@ const BudgetChart = () => {
   const { finances } = useFinances();
   const budgets = finances.budgetRecords;
 
+  if(!finances.budgetRecords){
+    return null;
+  }
+
   const labels = budgets.map((record) => record.Category);
   const data = budgets.map((record) => record.PercentIncomeAllocated);
 

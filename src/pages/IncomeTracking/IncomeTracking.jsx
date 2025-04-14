@@ -93,7 +93,7 @@ const IncomeTracking = () => {
     <div className={styles.incomeTracking}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2><strong>Income</strong></h2>
+          <h1><strong>Income</strong></h1>
           <h3>
             {parseFloat(finances.income).toLocaleString('en-US', {
               style: 'currency',
@@ -131,7 +131,8 @@ const IncomeTracking = () => {
       </div>
 
       <div className={styles.totalTaxContainer}>
-        <h2 style={{color: 'rgb(10, 191, 7)'}}>Post-Tax Income: {isNaN(calculateStateTax()) ? toUSD(finances.income) : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))}</h2>
+        <h2>Post-Tax Income:</h2>
+        <h2 style={{color: 'rgb(10, 191, 7)'}}>{isNaN(calculateStateTax()) ? toUSD(finances.income) : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))}</h2>
       </div>
     </div>
   )
