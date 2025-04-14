@@ -18,7 +18,7 @@ const IncomeTracking = () => {
   useEffect(() => {
     if (user) {
       setTaxStatus(user.TaxFilingStatus || 'Single');
-      setStateRate(user.StateTaxRate || 0);
+      setStateRate(user.StateTaxRate || '');
     }
   }, [user]);
 
@@ -118,22 +118,30 @@ const IncomeTracking = () => {
 
       <div className={styles.bracketTableContainer}>
         <TaxTable onFederalTaxChange={setFederalTax}></TaxTable>
+
+        <div className={styles.taxContainer}>
+          <div className={styles.totalTaxContainer}>
+            <h2 style={{color: 'rgb(10, 191, 7)'}}>{toUSD(parseFloat(finances.income))}</h2>
+            <h2>-</h2>
+            <h2 style={{color: 'red'}}>{toUSD(calculateStateTax() + federalTax)}</h2>
+          </div>
+
+          <div className={styles.totalTaxContainer}>
+            <h2>Post-Tax Income:</h2>
+            <h2 style={{color: 'rgb(10, 191, 7)'}}>{isNaN(calculateStateTax()) ? toUSD(finances.income) : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))}</h2>
+          </div>
+
+          <div className={styles.totalTaxContainer}>
+            <button className='btn btn-success'>Change Income</button>
+          </div>
+        </div>
+
         <div className={styles.stateTaxLiabilityContainer}>
           <h3>Total State Tax Liability for 2025 =</h3>
           <h4><strong>{isNaN(calculateStateTax()) ? '$0.00' : toUSD(calculateStateTax())}</strong></h4>
         </div>
       </div>
 
-      <div className={styles.totalTaxContainer}>
-        <h2 style={{color: 'rgb(10, 191, 7)'}}>{toUSD(parseFloat(finances.income))}</h2>
-        <h2>-</h2>
-        <h2 style={{color: 'red'}}>{toUSD(calculateStateTax() + federalTax)}</h2>
-      </div>
-
-      <div className={styles.totalTaxContainer}>
-        <h2>Post-Tax Income:</h2>
-        <h2 style={{color: 'rgb(10, 191, 7)'}}>{isNaN(calculateStateTax()) ? toUSD(finances.income) : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))}</h2>
-      </div>
     </div>
   )
 }
