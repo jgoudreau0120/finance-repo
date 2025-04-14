@@ -53,3 +53,8 @@
 .price {
   text-align: right;
 }
+
+.red {
+  color: red;
+  font-weight: bolder;
+}

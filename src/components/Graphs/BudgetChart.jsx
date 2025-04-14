@@ -4,7 +4,7 @@ import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import styles from './Chart.module.css';
 
-const BudgetChart = ({ budgetTotal, budgetTotalPercent }) => {
+const BudgetChart = () => {
   const { finances } = useFinances();
   const budgets = finances.budgetRecords;
 

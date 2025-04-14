@@ -2,7 +2,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { useFinances } from '../../FinancialContext';
 import styles from './Chart.module.css';
 
-const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
+const IncomeChart = () => {
   const { finances } = useFinances();
   const expenses = finances.expenses;
 
@@ -26,7 +26,7 @@ const IncomeChart = ({ postTaxIncomeTotal, totalIncomeTax }) => {
     labels: ['Monthly Expenses', 'Remaining Income', 'Income Tax'],
     datasets: [
       {
-        data: [(expensesTotal), (postTaxIncomeTotal / 12 - expensesTotal).toFixed(2), (totalIncomeTax / 12).toFixed(2)],
+        data: [(expensesTotal), (finances.postTaxIncome / 12 - expensesTotal).toFixed(2), ((finances.income - finances.postTaxIncome) / 12).toFixed(2)],
         backgroundColor: [ '#f00', '#0f0', '#00f'],
         borderColor: 'transparent',
         borderWidth: 3

@@ -5,9 +5,17 @@ import Tile from '../../components/Tiles/Tile';
 import '../../App.css';
 import IncomeChart from '../../components/Graphs/IncomeChart';
 import BudgetChart from '../../components/Graphs/BudgetChart';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
   const { finances } = useFinances();
+
+  const [budgetPercentTotal, setBudgetPercentTotal] = useState(0);
+  const [budgetTotal, setBudgetTotal] = useState(0);
+  const [budgetEntries, setBudgetEntries] = useState([]);
+
+  const [expenseEntries, setExpenseEntries] = useState([]);
+  const [expenseTotal, setExpenseTotal] = useState(0);
 
   const toUSD = (float) => {
     let value = '';
@@ -18,41 +26,51 @@ const Home = () => {
     return value;
   };
 
-  let expenseTotal = 0;
-  let expenseEntries = [];
+  useEffect(() => {
+    let tempExpenseTotal = 0;
+    let tempExpenseEntries = [];
+  
+    //Make calculations with expenses
+    if (finances.expenses.length > 0){
+      let expenses = finances.expenses;
+  
+      for (let i = 0; i < expenses.length; i++){
+        tempExpenseTotal += (parseFloat(expenses[i].Cost));
+        tempExpenseEntries.push(expenses[i]);
+      }
 
-  //Make calculations with expenses
-  if (finances.expenses.length > 0){
-    const expenses = finances.expenses;
-
-    for(let i = 0; i < expenses.length; i++){
-      expenseTotal += (parseFloat(expenses[i].Cost));
-      expenseEntries.push(expenses[i]);
+      setExpenseEntries(tempExpenseEntries);
+      setExpenseTotal(parseFloat(tempExpenseTotal));
     }
+  
+    let tempBudgetTotalPercent = 0;
+    let tempBudgetTotal = 0;
+    let tempBudgetEntries = [];
 
-    expenseTotal = parseFloat(expenseTotal);
-  }
+    //Make calculations with expenses
+    if (finances.budgetRecords.length > 0){
+      let budgets = finances.budgetRecords;
 
-  let budgetTotalPercent = 0;
-  let budgetTotal = 0;
-  let budgetEntries = [];
-  //Make calculations with expenses
-  if (finances.budgetRecords.length > 0){
-    let budgets = finances.budgetRecords;
-    for(let i = 0; i < budgets.length; i++){
-      budgetTotalPercent += budgets[i].PercentIncomeAllocated;
-      budgetTotal += (budgets[i].PercentIncomeAllocated / 100) * (finances.postTaxIncome - (expenseTotal * 12));
-      budgetEntries.push(budgets[i]);
+      for (let i = 0; i < budgets.length; i++){
+        tempBudgetTotalPercent += budgets[i].PercentIncomeAllocated;
+        tempBudgetTotal += (budgets[i].PercentIncomeAllocated / 100) * (finances.postTaxIncome - (expenseTotal * 12));
+        tempBudgetEntries.push(budgets[i]);
+      }
+
+      setBudgetPercentTotal(tempBudgetTotalPercent);
+      setBudgetTotal(tempBudgetTotal);
+      setBudgetEntries(tempBudgetEntries);
     }
-  }
+  
+  }, [finances])
 
 
   return (
     <div className={styles.home}>
       <div className={styles.tileRow}>
         <Tile title='Budgeting' link='/budgeting'>
-          <h4>{budgetTotalPercent}% / 100%</h4>
-          <h4>{toUSD(budgetTotal)} / {toUSD(finances.postTaxIncome - (expenseTotal * 12))}</h4>
+          <h4 className={budgetPercentTotal >= 100 ? styles.red : ''}>{budgetPercentTotal}% / 100%</h4>
+          <h4 className={budgetPercentTotal >= 100 ? styles.red : ''}>{toUSD(budgetTotal)} / {toUSD(finances.postTaxIncome - (expenseTotal * 12))}</h4>
 
           <ul className={styles.expenseList}>
             {budgetEntries.map((entry) => (
@@ -72,7 +90,7 @@ const Home = () => {
           <h4>
             {toUSD(finances.postTaxIncome)}
           </h4>
-          <IncomeChart postTaxIncomeTotal={finances.postTaxIncome} totalIncomeTax={(finances.income - finances.postTaxIncome)}></IncomeChart>
+          <IncomeChart></IncomeChart>
         </Tile>
 
         <Tile title='Expenses'>
