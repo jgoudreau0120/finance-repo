@@ -31,7 +31,7 @@ const Home = () => {
     let tempExpenseEntries = [];
   
     //Make calculations with expenses
-    if (finances.expenses.length > 0){
+    if (finances.expenses && finances.expenses.length > 0){
       let expenses = finances.expenses;
   
       for (let i = 0; i < expenses.length; i++){
@@ -48,7 +48,7 @@ const Home = () => {
     let tempBudgetEntries = [];
 
     //Make calculations with expenses
-    if (finances.budgetRecords.length > 0){
+    if (finances.budgetRecords && finances.budgetRecords.length > 0){
       let budgets = finances.budgetRecords;
 
       for (let i = 0; i < budgets.length; i++){

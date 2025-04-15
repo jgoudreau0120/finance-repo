@@ -13,7 +13,7 @@ const Budgeting = () => {
 
   let budgetTotal = 0;
   let budgetEntries = [];
-  const { finances } = useFinances();
+  const { finances, updateFinances } = useFinances();
   const [addModalOpen, setModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
