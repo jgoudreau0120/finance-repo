@@ -12,7 +12,6 @@ const IncomeTracking = () => {
   const [taxStatus, setTaxStatus] = useState('Single');
   const [stateTaxRate, setStateRate] = useState(0);
   const [federalTax, setFederalTax] = useState(0);
-  const [remainingIncome, setRemainingIncome] = useState(finances.income);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   useEffect(() => {
