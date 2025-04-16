@@ -10,31 +10,17 @@ import { useFinances } from '../../FinancialContext';
 const EditBudgetModal = ({isOpen, close, budgetEntry}) => {
 
   const { user } = useUser();
-  const { updateFinances, finances } = useFinances();
+  const { updateFinances, finances, fetchFinances } = useFinances();
   const [percent, changePercent] = useState('Percent of Post-tax income (%)');
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const submitEdit = async () => {
     try {
       const response = await axios.post(`${apiUrl}/change-budget-category`, {username: user.Username, category: budgetEntry.Category, newPercent: percent});
+      
+      fetchFinances(user.Username);
+
       alert(`${budgetEntry.Category} was changed!`);
-
-      //Pull budget
-      try {
-        const response = await axios.get(`${apiUrl}/pull-budgeting/${user.Username}`);
-        const budget = response.data.budget;
-
-        if (budget) {
-          updateFinances('budgetRecords', budget);
-          localStorage.setItem('userBudget', JSON.stringify(budget));
-        }
-        else {
-          alert("Couldn't pull budget for user");
-        }
-      }
-      catch (e) {
-        alert(`Could not find budget with username: ${user.Username}`);
-      }
     }
     catch (e) {
       alert(`Could not update budget category.`);

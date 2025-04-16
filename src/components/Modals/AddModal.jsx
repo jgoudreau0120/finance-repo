@@ -10,7 +10,7 @@ const AddModal = ({isOpen, close}) => {
   const [name, changeName] = useState('');
   const [cost, changeCost] = useState('Cost (without $)');
   const { user } = useUser();
-  const { updateFinances, finances } = useFinances();
+  const { updateFinances, finances, fetchFinances } = useFinances();
 
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
@@ -34,21 +34,8 @@ const AddModal = ({isOpen, close}) => {
     try {
       const response = await axios.post(`${apiUrl}/add-expense`, {username: user.Username, description: name, cost: cost});
       alert(`${name} was added to your expenses!`);
-
-      try {
-        const response = await axios.get(`${apiUrl}/pull-expenses/${user.Username}`);
-        const updatedExpenses = response.data.expenses;
-  
-        if (updatedExpenses) {
-          updateFinances('expenses', updatedExpenses);
-          localStorage.setItem('userExpenses', JSON.stringify(updatedExpenses));
-        } else {
-          alert("Couldn't pull updated expenses");
-        }
-      } 
-      catch (e) {
-        alert(`Could not fetch updated expenses for user: ${user.Username}`);
-      }
+    
+      fetchFinances(user.Username);
 
       changeName('');
       changeCost('Cost (without $)');

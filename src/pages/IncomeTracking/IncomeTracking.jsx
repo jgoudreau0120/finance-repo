@@ -8,10 +8,12 @@ import TaxTable from '../../components/TaxTable/TaxTable';
 const IncomeTracking = () => {
 
   const { user, setUser } = useUser();
-  const { updateFinances, finances } = useFinances();
+  const { updateFinances, finances, fetchFinances } = useFinances();
   const [taxStatus, setTaxStatus] = useState('Single');
   const [stateTaxRate, setStateRate] = useState(0);
   const [federalTax, setFederalTax] = useState(0);
+  const [newIncome, setNewIncome] = useState();
+  const [incomeButtonStatus, setIncomeButtonStatus] = useState(true);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   useEffect(() => {
@@ -75,6 +77,47 @@ const IncomeTracking = () => {
     return stateTaxTotal;
   }
 
+  const handleNumberChange = (event) => {
+    let currentInputNumber = event.target.value;
+
+    if (currentInputNumber.includes('-')) {
+      event.target.value = '';
+      setNewIncome('');
+      return;
+    }
+
+    if (currentInputNumber != ''){
+      if (currentInputNumber.includes('.')){
+        let [integer, decimal] = currentInputNumber.split('.');
+        if (decimal.length > 2){
+          decimal = decimal.substring(0, 2);
+        }
+        currentInputNumber = `${integer}.${decimal}`;
+        event.target.value = currentInputNumber;
+      }
+      setIncomeButtonStatus(false);
+      setNewIncome(parseFloat(currentInputNumber));
+    }
+    else {
+      setIncomeButtonStatus(true);
+      setNewIncome('');
+    }
+  }
+
+  const handleSubmitIncomeChange = async () => {
+
+    try {
+      const response = await axios.post(`${apiUrl}/change-income`, {username: user.Username, income: newIncome});
+
+      fetchFinances(user.Username);
+
+      alert('Income successfully changed!');
+    }
+    catch (e) {
+      alert(`Could not change user income.`);
+    }
+  }
+
   const toUSD = (float) => {
     let value = '';
     value = parseFloat(float).toLocaleString('en-US', {
@@ -122,16 +165,26 @@ const IncomeTracking = () => {
           <div className={styles.totalTaxContainer}>
             <h2 style={{color: 'rgb(10, 191, 7)'}}>{toUSD(parseFloat(finances.income))}</h2>
             <h2>-</h2>
-            <h2 style={{color: 'red'}}>{toUSD(calculateStateTax() + federalTax)}</h2>
+            <h2 style={{color: 'red'}}>{isNaN(calculateStateTax() + federalTax) ? toUSD(0) : toUSD(calculateStateTax() + federalTax)}</h2>
           </div>
 
           <div className={styles.totalTaxContainer}>
             <h2>Post-Tax Income:</h2>
-            <h2 style={{color: 'rgb(10, 191, 7)'}}>{isNaN(calculateStateTax()) ? toUSD(finances.income) : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))}</h2>
+            <h2 style={{ color: 'rgb(10, 191, 7)' }}>
+              {
+                isNaN(calculateStateTax()) || isNaN(finances.income) || isNaN(federalTax)
+                  ? toUSD(isNaN(finances.income) ? 0 : parseFloat(finances.income))
+                  : toUSD(parseFloat(finances.income) - (calculateStateTax() + federalTax))
+              }
+            </h2>
           </div>
 
           <div className={styles.totalTaxContainer}>
-            <button className='btn btn-success'>Change Income</button>
+            <input value={newIncome} placeholder='Enter Gross Income' type='number' min={0} onChange={handleNumberChange}></input>
+          </div>
+
+          <div className={styles.totalTaxContainer}>
+            <button className='btn btn-success' onClick={handleSubmitIncomeChange} disabled={incomeButtonStatus}>Change Income</button>
           </div>
         </div>
 

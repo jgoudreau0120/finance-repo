@@ -275,7 +275,7 @@ export const FinancialProvider = ({ children }) => {
   };
 
   return(
-    <FinancialContext.Provider value={{finances, updateFinances, setFinances, addExpense, removeExpense, calculatePostTaxIncome}}>
+    <FinancialContext.Provider value={{finances, updateFinances, setFinances, addExpense, removeExpense, calculatePostTaxIncome, fetchFinances}}>
       {children}
     </FinancialContext.Provider>
   );

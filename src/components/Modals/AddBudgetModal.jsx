@@ -10,7 +10,7 @@ const AddBudgetModal = ({isOpen, close}) => {
   const [name, changeName] = useState('');
   const [percent, changePercent] = useState('Percent of Post-tax income (%)');
   const { user } = useUser();
-  const { updateFinances, finances } = useFinances();
+  const { updateFinances, finances, fetchFinances } = useFinances();
 
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
@@ -33,24 +33,10 @@ const AddBudgetModal = ({isOpen, close}) => {
 
     try {
       const response = await axios.post(`${apiUrl}/add-budget-category`, {username: user.Username, category: name, percentIncomeAllocated: percent});
+      
+      fetchFinances(user.Username);
+      
       alert(`${name} was added to your budget!`);
-
-      //Pull budget
-      try {
-        const response = await axios.get(`${apiUrl}/pull-budgeting/${user.Username}`);
-        const budget = response.data.budget;
-
-        if (budget) {
-          updateFinances('budgetRecords', budget);
-          localStorage.setItem('userBudget', JSON.stringify(budget));
-        }
-        else {
-          alert("Couldn't pull budget for user");
-        }
-      }
-      catch (e) {
-        alert(`Could not find budget with username: ${user.Username}`);
-      }
     }
     catch (e) {
       alert(`Could not insert new budget category.`);

@@ -21,7 +21,7 @@ const Budgeting = () => {
 
     //Make calculations with budget to determine total percentage between
     //all categories
-    if (finances.budgetRecords.length > 0){
+    if (finances.budgetRecords && finances.budgetRecords.length > 0){
       const budgets = finances.budgetRecords;
   
       for(let i = 0; i < budgets.length; i++){
