@@ -5,13 +5,14 @@ import { useState } from "react";
 import axios from "axios";
 import { useFinances } from "../../FinancialContext";
 import { useUser } from "../../UserContext";
+import DeleteAccountModal from "../../components/Modals/DeleteAccountModal";
 
 const AccountManagement = () => {
   const [buttonState, changeButtonState] = useState(true);
   const [inputData, setInputData] = useState({ oldPassword: '', newPassword: '', confirmedNewPassword: '' });
   const { finances, updateFinances } = useFinances();
   const { user, setUser } = useUser();
-
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const handleInputChange = (event) => {
@@ -62,6 +63,9 @@ const AccountManagement = () => {
         <input value={inputData.confirmedNewPassword} id='confirmedNewPassword' placeholder='Confirm New Password' name='changePasswordInput' type='password' onChange={handleInputChange}></input>
         <button className='btn btn-primary' onClick={handleSubmit} disabled={buttonState}>Change Password</button>
       </div>
+
+      <button className='btn btn-danger' onClick={() => {setDeleteModalOpen(true)}}>Delete Account</button>
+      <DeleteAccountModal isOpen={deleteModalOpen} close={() => {setDeleteModalOpen(false)}}></DeleteAccountModal>
     </div>
   )
 }

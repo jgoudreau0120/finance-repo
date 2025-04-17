@@ -59,9 +59,7 @@ const Navbar = () => {
   );
   
   const logout = () => {
-    localStorage.removeItem('userData');
-    localStorage.removeItem('userIncome');
-    localStorage.removeItem('userExpenses');
+    localStorage.clear();
     window.location.href = '/';
   }
 
