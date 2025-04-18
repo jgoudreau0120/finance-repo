@@ -75,7 +75,7 @@ const Navbar = () => {
       <div className={styles.quickButtonContainer}>
         <Link to='/home'>Home</Link>
         <Link to='/myAccount'>My Account</Link>
-        <Link to='/settings'>Settings</Link>
+        {/* <Link to='/settings'>Settings</Link> */}
         <Link to='/' className={styles.logout} onClick={logout}>Log Out</Link>
       </div>
     </nav>

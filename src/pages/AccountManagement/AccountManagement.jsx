@@ -6,6 +6,7 @@ import axios from "axios";
 import { useFinances } from "../../FinancialContext";
 import { useUser } from "../../UserContext";
 import DeleteAccountModal from "../../components/Modals/DeleteAccountModal";
+import AccountActionModal from "../../components/Modals/AccountActionModal";
 
 const AccountManagement = () => {
   const [buttonState, changeButtonState] = useState(true);
@@ -13,6 +14,8 @@ const AccountManagement = () => {
   const { finances, updateFinances } = useFinances();
   const { user, setUser } = useUser();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [actionModalOpen, setActionModalOpen] = useState(false);
+  const [buttonAction, setButtonAction] = useState('');
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const handleInputChange = (event) => {
@@ -56,6 +59,7 @@ const AccountManagement = () => {
 
   return (
     <div className={styles.myAccount}>
+      <h2>Logged in as: {user.Username}</h2>
       <div className={styles.container}>
         <h2>Change Password</h2>
         <input value={inputData.oldPassword} id='oldPassword' placeholder='Old Password' name='changePasswordInput' onChange={handleInputChange}></input>
@@ -63,9 +67,14 @@ const AccountManagement = () => {
         <input value={inputData.confirmedNewPassword} id='confirmedNewPassword' placeholder='Confirm New Password' name='changePasswordInput' type='password' onChange={handleInputChange}></input>
         <button className='btn btn-primary' onClick={handleSubmit} disabled={buttonState}>Change Password</button>
       </div>
-
+      <div className={styles.buttonRow}>
+        <button className='btn btn-danger' onClick={() => {setButtonAction('budget'); setActionModalOpen(true);}}>Delete Budget Data</button>
+        <button className='btn btn-danger' value={'income'} onClick={() => {setButtonAction('income'); setActionModalOpen(true)}}>Delete Income Data</button>
+        <button className='btn btn-danger' value={'expenses'} onClick={() => {setButtonAction('expenses'); setActionModalOpen(true)}}>Delete Expense Data</button>
+      </div>
       <button className='btn btn-danger' onClick={() => {setDeleteModalOpen(true)}}>Delete Account</button>
       <DeleteAccountModal isOpen={deleteModalOpen} close={() => {setDeleteModalOpen(false)}}></DeleteAccountModal>
+      <AccountActionModal action={buttonAction} isOpen={actionModalOpen} close={() => {setActionModalOpen(false)}}></AccountActionModal>
     </div>
   )
 }

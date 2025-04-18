@@ -12,6 +12,7 @@ import './App.css';
 import { UserProvider } from './UserContext';
 import { FinancialProvider } from './FinancialContext';
 import { useNavigate } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
@@ -23,13 +24,13 @@ function App() {
             <div className='main'>
               <Routes>
                 <Route path='/' element={<Login/>}></Route>
-                <Route path='/home' element={<Home/>}></Route>
-                <Route path='/myAccount' element={<Account/>}></Route>
-                <Route path='/settings' element={<Settings/>}></Route>
-                <Route path='/createUser' element={<CreateUser/>}></Route>
-                <Route path='/budgeting' element={<Budgeting/>}></Route>
-                <Route path='/income' element={<IncomeTracking/>}></Route>
-                <Route path='/expenses' element={<Expenses/>}></Route>
+                <Route path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
+                <Route path='/myAccount' element={<ProtectedRoute><Account/></ProtectedRoute>}></Route>
+                {/* <Route path='/settings' element={<Settings/>}></Route> */}
+                <Route path='/createUser' element={<ProtectedRoute><CreateUser/></ProtectedRoute>}></Route>
+                <Route path='/budgeting' element={<ProtectedRoute><Budgeting/></ProtectedRoute>}></Route>
+                <Route path='/income' element={<ProtectedRoute><IncomeTracking/></ProtectedRoute>}></Route>
+                <Route path='/expenses' element={<ProtectedRoute><Expenses/></ProtectedRoute>}></Route>
               </Routes>
             </div>
           </Router>

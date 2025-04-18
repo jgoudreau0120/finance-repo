@@ -37,6 +37,9 @@ const Budgeting = () => {
         <h2>
           <strong>My Monthly Budget</strong>
         </h2>
+        <h3 className={budgetTotal >= 100 ? styles.red : ''}>
+          {budgetTotal}% / 100%
+        </h3>
       </div>
       <div className={styles.budgetTileContainer}>
         
