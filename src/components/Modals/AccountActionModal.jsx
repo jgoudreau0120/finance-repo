@@ -1,13 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Modal.module.css';
+import { useUser } from '../../UserContext';
 
 const AccountActionModal = ({ action, isOpen, close }) => {
-  
-  switch (action) {
+  const { user } = useUser();
+  const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
-  }
-  const submit = () => {
-
+  const submit = async () => {
+    try {
+      const response = await axios.post(`${apiUrl}/delete-data`, {username: user.Username, data: action});
+      
+      fetchFinances(user.Username);
+      
+      alert(`${data} data cleared.`);
+    }
+    catch (e) {
+      alert(`Could not delete data.`);
+    }
+    close();
   }
 
   if(!isOpen){
