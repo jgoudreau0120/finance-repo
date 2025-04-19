@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
 
   const { setUser } = useUser();
-  const { updateFinances } = useFinances();
+  const { updateFinances, fetchFinances } = useFinances();
   const { setFinances }= useFinances();
   const navigate = useNavigate();
 
@@ -37,56 +37,56 @@ const Login = () => {
     loadData();
   }, []);
 
-  const fetchFinances = async (username) => {
-    //Pull income
-    try {
-      const response = await axios.get(`${apiUrl}/pull-income/${username}`);
-      const income = response.data.income;
+  // const fetchFinances = async (username) => {
+  //   //Pull income
+  //   try {
+  //     const response = await axios.get(`${apiUrl}/pull-income/${username}`);
+  //     const income = response.data.income;
 
-      if (income) {
-        updateFinances('income', income);
-        localStorage.setItem('userIncome', JSON.stringify(income));
-      }
-      else {
-        alert("Couldn't pull income for user")
-      }
-    }
-    catch (e) {
-      alert(`Could not find income with username: ${username}`);
-    }
-    //Pull expenses
-    try {
-      const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
-      const expenses = response.data.expenses;
+  //     if (income) {
+  //       updateFinances('income', income);
+  //       localStorage.setItem('userIncome', JSON.stringify(income));
+  //     }
+  //     else {
+  //       alert("Couldn't pull income for user")
+  //     }
+  //   }
+  //   catch (e) {
+  //     alert(`Could not find income with username: ${username}`);
+  //   }
+  //   //Pull expenses
+  //   try {
+  //     const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
+  //     const expenses = response.data.expenses;
 
-      if (expenses) {
-        updateFinances('expenses', expenses);
-        localStorage.setItem('userExpenses', JSON.stringify(expenses));
-      }
-      else {
-        alert("Couldn't pull expenses for user")
-      }
-    }
-    catch (e) {
-      alert(`Could not find expenses with username: ${username}`);
-    }
-    //Pull budget
-    try {
-      const response = await axios.get(`${apiUrl}/pull-budgeting/${username}`);
-      const budget = response.data.budget;
+  //     if (expenses) {
+  //       updateFinances('expenses', expenses);
+  //       localStorage.setItem('userExpenses', JSON.stringify(expenses));
+  //     }
+  //     else {
+  //       alert("Couldn't pull expenses for user")
+  //     }
+  //   }
+  //   catch (e) {
+  //     alert(`Could not find expenses with username: ${username}`);
+  //   }
+  //   //Pull budget
+  //   try {
+  //     const response = await axios.get(`${apiUrl}/pull-budgeting/${username}`);
+  //     const budget = response.data.budget;
 
-      if (budget) {
-        updateFinances('budgetRecords', budget);
-        localStorage.setItem('userBudget', JSON.stringify(budget));
-      }
-      else {
-        alert("Couldn't pull budget for user");
-      }
-    }
-    catch (e) {
-      alert(`Could not find budget with username: ${username}`);
-    }
-  };
+  //     if (budget) {
+  //       updateFinances('budgetRecords', budget);
+  //       localStorage.setItem('userBudget', JSON.stringify(budget));
+  //     }
+  //     else {
+  //       alert("Couldn't pull budget for user");
+  //     }
+  //   }
+  //   catch (e) {
+  //     alert(`Could not find budget with username: ${username}`);
+  //   }
+  // };
 
   const handleSignIn = async () => {
     if (username === "" || password === ""){

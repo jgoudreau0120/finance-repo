@@ -29,11 +29,14 @@ export const FinancialProvider = ({ children }) => {
         localStorage.setItem('userIncome', JSON.stringify(income));
       }
       else {
-        alert("Couldn't pull income for user")
+        alert("Couldn't pull income for user");
       }
     }
     catch (e) {
-      alert(`Could not find income with username: ${username}`);
+      if (e.response.status === 404){
+        updateFinances('income', 0);
+        localStorage.setItem('userIncome', 0);
+      }
     }
     //Pull expenses
     try {
@@ -49,7 +52,10 @@ export const FinancialProvider = ({ children }) => {
       }
     }
     catch (e) {
-      alert(`Could not find expenses with username: ${username}`);
+      if (e.response.status === 404){
+        updateFinances('expenses', []);
+        localStorage.setItem('userExpenses', []);
+      }
     }
     //Pull budget
     try {
@@ -65,7 +71,10 @@ export const FinancialProvider = ({ children }) => {
       }
     }
     catch (e) {
-      alert(`Could not find budget with username: ${username}`);
+      if (e.response.status === 404){
+        updateFinances('budgetRecords', []);
+        localStorage.setItem('userBudget', []);
+      }
     }
   };
 

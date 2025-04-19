@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Modal.module.css';
 import { useUser } from '../../UserContext';
+import { useFinances } from '../../FinancialContext';
+import axios from 'axios';
 
 const AccountActionModal = ({ action, isOpen, close }) => {
   const { user } = useUser();
+  const { fetchFinances } = useFinances();
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const submit = async () => {
@@ -12,7 +15,7 @@ const AccountActionModal = ({ action, isOpen, close }) => {
       
       fetchFinances(user.Username);
       
-      alert(`${data} data cleared.`);
+      alert(`${action} data cleared.`);
     }
     catch (e) {
       alert(`Could not delete data.`);

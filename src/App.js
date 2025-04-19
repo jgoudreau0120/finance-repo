@@ -27,7 +27,7 @@ function App() {
                 <Route path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
                 <Route path='/myAccount' element={<ProtectedRoute><Account/></ProtectedRoute>}></Route>
                 {/* <Route path='/settings' element={<Settings/>}></Route> */}
-                <Route path='/createUser' element={<ProtectedRoute><CreateUser/></ProtectedRoute>}></Route>
+                <Route path='/createUser' element={<CreateUser/>}></Route>
                 <Route path='/budgeting' element={<ProtectedRoute><Budgeting/></ProtectedRoute>}></Route>
                 <Route path='/income' element={<ProtectedRoute><IncomeTracking/></ProtectedRoute>}></Route>
                 <Route path='/expenses' element={<ProtectedRoute><Expenses/></ProtectedRoute>}></Route>
