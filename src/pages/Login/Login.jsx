@@ -8,12 +8,14 @@ import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 import { useNavigate } from "react-router-dom";
+import LoginHelpModal from '../../components/Modals/LoginHelpModal';
 
 const Login = () => {
 
   const { setUser } = useUser();
   const { updateFinances, fetchFinances } = useFinances();
   const { setFinances }= useFinances();
+  const [loginButton, setLoginButton] = useState(false);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -36,57 +38,6 @@ const Login = () => {
 
     loadData();
   }, []);
-
-  // const fetchFinances = async (username) => {
-  //   //Pull income
-  //   try {
-  //     const response = await axios.get(`${apiUrl}/pull-income/${username}`);
-  //     const income = response.data.income;
-
-  //     if (income) {
-  //       updateFinances('income', income);
-  //       localStorage.setItem('userIncome', JSON.stringify(income));
-  //     }
-  //     else {
-  //       alert("Couldn't pull income for user")
-  //     }
-  //   }
-  //   catch (e) {
-  //     alert(`Could not find income with username: ${username}`);
-  //   }
-  //   //Pull expenses
-  //   try {
-  //     const response = await axios.get(`${apiUrl}/pull-expenses/${username}`);
-  //     const expenses = response.data.expenses;
-
-  //     if (expenses) {
-  //       updateFinances('expenses', expenses);
-  //       localStorage.setItem('userExpenses', JSON.stringify(expenses));
-  //     }
-  //     else {
-  //       alert("Couldn't pull expenses for user")
-  //     }
-  //   }
-  //   catch (e) {
-  //     alert(`Could not find expenses with username: ${username}`);
-  //   }
-  //   //Pull budget
-  //   try {
-  //     const response = await axios.get(`${apiUrl}/pull-budgeting/${username}`);
-  //     const budget = response.data.budget;
-
-  //     if (budget) {
-  //       updateFinances('budgetRecords', budget);
-  //       localStorage.setItem('userBudget', JSON.stringify(budget));
-  //     }
-  //     else {
-  //       alert("Couldn't pull budget for user");
-  //     }
-  //   }
-  //   catch (e) {
-  //     alert(`Could not find budget with username: ${username}`);
-  //   }
-  // };
 
   const handleSignIn = async () => {
     if (username === "" || password === ""){
@@ -124,10 +75,11 @@ const Login = () => {
       <div className={styles.container}>
         <input id='myUsernameInput' type='text' placeholder='Username' onChange={(e) => {setUsername(e.target.value)}}/>
         <input id='myPasswordInput' type='password' placeholder='Password' onChange={(e) => {setPassword(e.target.value)}}/>
-        <button className={classNames('btn', 'btn-info', styles.helpButton)}>Can't log in?</button>
+        <button className={classNames('btn', 'btn-info', styles.helpButton)} onClick={() => {setLoginButton(true)}}>Can't log in?</button>
         <button className='btn btn-primary' onClick={handleSignIn}>Sign In</button>
         <Link to='/createUser'><button className='btn btn-success'>Create User</button></Link>
       </div>
+      <LoginHelpModal isOpen={loginButton} close={() => {setLoginButton(false)}}></LoginHelpModal>
     </div>
   )
 }
