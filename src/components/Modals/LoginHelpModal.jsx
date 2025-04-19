@@ -9,11 +9,14 @@ const LoginHelpModal = ({ isOpen, close }) => {
   const { user } = useUser();
   const { fetchFinances } = useFinances();
   const [submitState, setSubmitState] = useState(true);
+  const [inputUsername, setInputUsername] = useState('');
+  const [inputFirstName, setInputFirstName] = useState('');
+  const [inputLastName, setInputLastName] = useState('');
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const submit = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/pull-password`, {username: '', firstName: '', lastName: ''});
+      const response = await axios.post(`${apiUrl}/pull-password`, {username: inputUsername, firstName: inputFirstName, lastName: inputLastName});
       if (response) {
         alert(`Your password is: ${response.data.password}`);
       }
@@ -49,10 +52,10 @@ const LoginHelpModal = ({ isOpen, close }) => {
           <h2>Login Help</h2>
         </div>
         <div className={styles.body}>
-          <input placeholder='Username' name='inputs' onChange={handleInputChange}></input>
-          <input placeholder='First Name' name='inputs' onChange={handleInputChange}></input>
-          <input placeholder='Last Name' name='inputs' onChange={handleInputChange}></input>
-          <button className='btn btn-primary' onClick={''} disabled={submitState}>Retrieve Password</button>
+          <input placeholder='Username' name='inputs' onChange={(event) => {handleInputChange(); setInputUsername(event.target.value);}}></input>
+          <input placeholder='First Name' name='inputs' onChange={(event) => {handleInputChange(); setInputFirstName(event.target.value);}}></input>
+          <input placeholder='Last Name' name='inputs' onChange={(event) => {handleInputChange(); setInputLastName(event.target.value);}}></input>
+          <button className='btn btn-primary' onClick={submit} disabled={submitState}>Retrieve Password</button>
           <button className='btn btn-secondary' onClick={close}>Close</button>
         </div>
       </div>
