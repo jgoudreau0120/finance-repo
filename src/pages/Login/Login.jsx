@@ -63,7 +63,7 @@ const Login = () => {
       }
     }
     catch (e) {
-      alert(`Could not find account with username: ${username}`);
+      alert(`Invalid username or password!`);
     }
   };
 
