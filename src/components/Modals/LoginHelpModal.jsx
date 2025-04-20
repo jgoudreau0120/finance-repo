@@ -52,9 +52,9 @@ const LoginHelpModal = ({ isOpen, close }) => {
           <h2>Login Help</h2>
         </div>
         <div className={styles.body}>
-          <input placeholder='Username' name='inputs' onChange={(event) => {handleInputChange(); setInputUsername(event.target.value);}}></input>
-          <input placeholder='First Name' name='inputs' onChange={(event) => {handleInputChange(); setInputFirstName(event.target.value);}}></input>
-          <input placeholder='Last Name' name='inputs' onChange={(event) => {handleInputChange(); setInputLastName(event.target.value);}}></input>
+          <input placeholder='Username' name='inputs' value={inputUsername} onChange={(event) => {handleInputChange(); setInputUsername(event.target.value);}}></input>
+          <input placeholder='First Name' name='inputs' value={inputFirstName} onChange={(event) => {handleInputChange(); setInputFirstName(event.target.value);}}></input>
+          <input placeholder='Last Name' name='inputs' value={inputLastName} onChange={(event) => {handleInputChange(); setInputLastName(event.target.value);}}></input>
           <button className='btn btn-primary' onClick={submit} disabled={submitState}>Retrieve Password</button>
           <button className='btn btn-secondary' onClick={close}>Close</button>
         </div>

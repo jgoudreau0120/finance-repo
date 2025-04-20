@@ -1,16 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Modal.module.css';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
 
 const AddBudgetModal = ({isOpen, close}) => {
   const [name, changeName] = useState('');
-  const [percent, changePercent] = useState('Percent of Post-tax income (%)');
+  const [percent, changePercent] = useState('');
   const { user } = useUser();
   const { updateFinances, finances, fetchFinances } = useFinances();
+  const [buttonState, changeButtonState] = useState(true);
 
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
@@ -27,7 +28,13 @@ const AddBudgetModal = ({isOpen, close}) => {
     }
 
     changePercent(parseFloat(currentInputNumber));
+
   }
+
+  useEffect(() => {
+    const isInvalid = name === '' || percent === '' || isNaN(percent);
+    changeButtonState(isInvalid);
+  }, [name, percent]);
 
   const submitAddition = async () => {
 
@@ -44,7 +51,7 @@ const AddBudgetModal = ({isOpen, close}) => {
     close();
 
     changeName('');
-    changePercent('Percent of Post-tax income (%)')
+    changePercent(0);
   }
 
   if(!isOpen)
@@ -59,7 +66,7 @@ const AddBudgetModal = ({isOpen, close}) => {
         <div className={styles.body}>
           <input value={name} placeholder='Category' type='text' onChange={(e) => {changeName(e.target.value)}}></input>
           <input value={percent} placeholder='Percent of Post-tax income (%)' type='number' min={0} step={0.01} onChange={handleNumberChange}></input>
-          <button className='btn btn-primary' onClick={submitAddition}>Submit</button>
+          <button className='btn btn-primary' onClick={submitAddition} disabled={buttonState}>Submit</button>
           <button className='btn btn-secondary' onClick={close}>Close</button>
         </div>
       </div>

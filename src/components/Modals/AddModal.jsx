@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Modal.module.css';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
@@ -9,6 +9,7 @@ import { useFinances } from '../../FinancialContext';
 const AddModal = ({isOpen, close}) => {
   const [name, changeName] = useState('');
   const [cost, changeCost] = useState('Cost (without $)');
+  const [buttonState, changeButtonState] = useState(true);
   const { user } = useUser();
   const { updateFinances, finances, fetchFinances } = useFinances();
 
@@ -28,6 +29,11 @@ const AddModal = ({isOpen, close}) => {
 
     changeCost(parseFloat(currentInputNumber));
   }
+
+  useEffect(() => {
+    const isInvalid = name === '' || cost === '' || isNaN(cost);
+    changeButtonState(isInvalid);
+  }, [name, cost]);
 
   const submitAddition = async () => {
     //Pull income
@@ -58,7 +64,7 @@ const AddModal = ({isOpen, close}) => {
         <div className={styles.body}>
           <input value={name} placeholder='Name' type='text' onChange={(e) => {changeName(e.target.value)}}></input>
           <input value={cost} placeholder='Cost (without $)' type='number' min={0} step={0.01} onChange={handleNumberChange}></input>
-          <button className='btn btn-primary' onClick={submitAddition}>Submit</button>
+          <button className='btn btn-primary' onClick={submitAddition} disabled={buttonState}>Submit</button>
           <button className='btn btn-secondary' onClick={close}>Close</button>
         </div>
       </div>

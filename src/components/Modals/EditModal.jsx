@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Modal.module.css';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useFinances } from '../../FinancialContext';
@@ -12,6 +12,7 @@ const EditModal = ({isOpen, close, expense}) => {
   const { user } = useUser();
   const { updateFinances, finances } = useFinances();
   const [cost, changeCost] = useState('Cost (without $)');
+  const [buttonState, changeButtonState] = useState(true);
   const apiUrl = 'https://saqarapux2.us-east-2.awsapprunner.com';
 
   const submitEdit = async () => {
@@ -39,6 +40,10 @@ const EditModal = ({isOpen, close, expense}) => {
     }
     close();
   }
+  useEffect(() => {
+    const isInvalid = cost === '' || isNaN(cost);
+    changeButtonState(isInvalid);
+  }, [cost]);
 
   const handleNumberChange = (event) => {
     let currentInputNumber = event.target.value;
@@ -70,7 +75,7 @@ const EditModal = ({isOpen, close, expense}) => {
         </div>
         <div className={styles.body}>
           <input value={cost} placeholder='Cost (without $)' type='number' min={0} step={0.01} onChange={handleNumberChange}></input>
-          <button className='btn btn-primary' onClick={submitEdit}>Confirm</button>
+          <button className='btn btn-primary' onClick={submitEdit} disabled={buttonState}>Confirm</button>
           <button className='btn btn-secondary' onClick={() => {close(); changeCost('Cost (without $)')}}>Close</button>
         </div>
       </div>
