@@ -88,7 +88,7 @@ const Home = () => {
           </h4>
           <h4>Post-tax:</h4>
           <h4>
-            {toUSD(finances.postTaxIncome)}
+            {parseFloat(finances.income) === 0.00 ? toUSD(0) : toUSD(finances.postTaxIncome)}
           </h4>
           <IncomeChart></IncomeChart>
         </Tile>

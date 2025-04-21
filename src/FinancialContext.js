@@ -35,7 +35,6 @@ export const FinancialProvider = ({ children }) => {
     catch (e) {
       if (e.response.status === 404){
         updateFinances('income', 0);
-        updateFinances('postTaxIncome', 0);
         localStorage.setItem('userIncome', JSON.stringify(0));
       }
     }

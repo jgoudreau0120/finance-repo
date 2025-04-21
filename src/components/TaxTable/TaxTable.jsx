@@ -185,7 +185,7 @@ const TaxTable = ({ onFederalTaxChange }) => {
           </tbody>
         </table>
         <h3>Total Federal Tax Liability for 2025 = </h3>
-        <h4><strong>{toUSD(taxLiability)}</strong></h4>
+        <h4><strong>{isNaN(taxLiability) ? toUSD(0) : toUSD(taxLiability)}</strong></h4>
         <div>
           
         </div>
