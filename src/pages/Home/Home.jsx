@@ -70,7 +70,7 @@ const Home = () => {
       <div className={styles.tileRow}>
         <Tile title='Budgeting' link='/budgeting'>
           <h4 className={budgetPercentTotal >= 100 ? styles.red : ''}>{budgetPercentTotal}% / 100%</h4>
-          <h4 className={budgetPercentTotal >= 100 ? styles.red : ''}>{toUSD(budgetTotal)} / {toUSD(finances.postTaxIncome - (expenseTotal * 12))}</h4>
+          <h4 className={budgetPercentTotal >= 100 ? styles.red : ''}>{finances.income > 0 ? toUSD(budgetTotal) : ''} / {finances.income > 0 ? toUSD(finances.postTaxIncome - (expenseTotal * 12)) : ''}</h4>
 
           <ul className={styles.expenseList}>
             {budgetEntries.map((entry) => (

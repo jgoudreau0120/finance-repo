@@ -35,7 +35,8 @@ export const FinancialProvider = ({ children }) => {
     catch (e) {
       if (e.response.status === 404){
         updateFinances('income', 0);
-        localStorage.setItem('userIncome', 0);
+        updateFinances('postTaxIncome', 0);
+        localStorage.setItem('userIncome', JSON.stringify(0));
       }
     }
     //Pull expenses
@@ -54,7 +55,7 @@ export const FinancialProvider = ({ children }) => {
     catch (e) {
       if (e.response.status === 404){
         updateFinances('expenses', []);
-        localStorage.setItem('userExpenses', []);
+        localStorage.setItem('userExpenses', JSON.stringify([]));
       }
     }
     //Pull budget
@@ -73,7 +74,7 @@ export const FinancialProvider = ({ children }) => {
     catch (e) {
       if (e.response.status === 404){
         updateFinances('budgetRecords', []);
-        localStorage.setItem('userBudget', []);
+        localStorage.setItem('userBudget', JSON.stringify([]));
       }
     }
   };

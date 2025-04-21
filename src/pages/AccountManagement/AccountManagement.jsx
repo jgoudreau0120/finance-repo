@@ -68,7 +68,7 @@ const AccountManagement = () => {
         <button className='btn btn-primary' onClick={handleSubmit} disabled={buttonState}>Change Password</button>
       </div>
       <div className={styles.buttonRow}>
-        <button className='btn btn-danger' onClick={() => {setButtonAction('budget'); setActionModalOpen(true);}}>Delete Budget Data</button>
+        <button className='btn btn-danger' value={'budget'} onClick={() => {setButtonAction('budget'); setActionModalOpen(true);}}>Delete Budget Data</button>
         <button className='btn btn-danger' value={'income'} onClick={() => {setButtonAction('income'); setActionModalOpen(true)}}>Delete Income Data</button>
         <button className='btn btn-danger' value={'expenses'} onClick={() => {setButtonAction('expenses'); setActionModalOpen(true)}}>Delete Expense Data</button>
       </div>
