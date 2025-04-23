@@ -49,12 +49,9 @@ const AccountManagement = () => {
       alert(`Could not update password.`);
     }
 
-    const inputElems = document.getElementsByName('changePasswordInput');
-
-    for (let i = 0; i < inputElems.length; i++){
-      inputElems[i].value = '';
-    }
-
+    const newInputData = { oldPassword: '', newPassword: '', confirmedNewPassword: '' };
+    setInputData(newInputData);
+    changeButtonState(true);
   }
 
   return (
